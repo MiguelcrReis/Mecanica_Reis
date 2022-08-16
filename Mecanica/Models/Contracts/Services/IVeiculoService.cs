@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Mecanica.Models.Contracts.Services
 {
-    interface IVeiculoService
+    public interface IVeiculoService
     {
-        List<VeiculoDto> ListarVeiculos();
+        List<VeiculoDto> Listar();
     }
 }

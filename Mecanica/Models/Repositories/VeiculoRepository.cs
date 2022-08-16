@@ -9,9 +9,10 @@ namespace Mecanica.Models.Repositories
 {
     public class VeiculoRepository : IVeiculoRepository
     {
-        public List<VeiculoDto> ListarVeiculos()
+        public List<VeiculoDto> Listar()
         {
-            throw new NotImplementedException();
+            var veiculos = ContextDataFake.Veiculos;
+            return veiculos.OrderBy(p => p.Fabricante).ToList();
         }
     }
 }

@@ -1,3 +1,7 @@
+using Mecanica.Models.Contracts.Repositories;
+using Mecanica.Models.Contracts.Services;
+using Mecanica.Models.Repositories;
+using Mecanica.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +28,9 @@ namespace Mecanica
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+            services.AddScoped<IVeiculoService, VeiculoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

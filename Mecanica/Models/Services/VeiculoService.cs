@@ -1,4 +1,5 @@
-﻿using Mecanica.Models.Contracts.Services;
+﻿using Mecanica.Models.Contracts.Repositories;
+using Mecanica.Models.Contracts.Services;
 using Mecanica.Models.DTOS;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,20 @@ namespace Mecanica.Models.Services
 {
     public class VeiculoService : IVeiculoService
     {
-        public List<VeiculoDto> ListarVeiculos()
+        private readonly IVeiculoRepository _veiculoRepository;
+
+        public VeiculoService(IVeiculoRepository veiculoRepository)
         {
-            throw new NotImplementedException();
+            _veiculoRepository = veiculoRepository;
+        }
+
+        public List<VeiculoDto> Listar()
+        {
+            try
+            {
+                return _veiculoRepository.Listar();
+            }
+            catch (Exception ex) { throw ex; }
         }
     }
 }
