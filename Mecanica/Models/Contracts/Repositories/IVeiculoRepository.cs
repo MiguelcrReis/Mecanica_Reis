@@ -8,6 +8,7 @@ namespace Mecanica.Models.Contracts.Repositories
 {
     public interface IVeiculoRepository
     {
+        void Cadastrar(VeiculoDto veiculo);
         List<VeiculoDto> Listar();
     }
 }

@@ -8,6 +8,7 @@ namespace Mecanica.Models.Contracts.Services
 {
     public interface IVeiculoService
     {
+        void Cadastrar(VeiculoDto veiculo);
         List<VeiculoDto> Listar();
     }
 }

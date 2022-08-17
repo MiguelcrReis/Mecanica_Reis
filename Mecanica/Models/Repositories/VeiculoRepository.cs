@@ -9,6 +9,11 @@ namespace Mecanica.Models.Repositories
 {
     public class VeiculoRepository : IVeiculoRepository
     {
+        public void Cadastrar(VeiculoDto veiculo)
+        {
+            ContextDataFake.Veiculos.Add(veiculo); 
+        }
+
         public List<VeiculoDto> Listar()
         {
             var veiculos = ContextDataFake.Veiculos;

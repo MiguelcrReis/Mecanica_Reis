@@ -17,6 +17,15 @@ namespace Mecanica.Models.Services
             _veiculoRepository = veiculoRepository;
         }
 
+        public void Cadastrar(VeiculoDto veiculo)
+        {
+            try
+            {
+                _veiculoRepository.Cadastrar(veiculo);
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
         public List<VeiculoDto> Listar()
         {
             try
