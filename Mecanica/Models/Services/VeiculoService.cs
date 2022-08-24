@@ -17,6 +17,15 @@ namespace Mecanica.Models.Services
             _veiculoRepository = veiculoRepository;
         }
 
+        public void Atualizar(VeiculoDto veiculo)
+        {
+            try
+            {
+                _veiculoRepository.Atualizar(veiculo);
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
         public void Cadastrar(VeiculoDto veiculo)
         {
             try
@@ -31,6 +40,15 @@ namespace Mecanica.Models.Services
             try
             {
                 return _veiculoRepository.Listar();
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
+        public VeiculoDto PesquisarPorId(string id)
+        {
+            try
+            {
+                return _veiculoRepository.PesquisarPorId(id);
             }
             catch (Exception ex) { throw ex; }
         }
