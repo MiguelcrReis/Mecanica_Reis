@@ -35,6 +35,12 @@ namespace Mecanica.Models.Repositories
             ContextDataFake.Veiculos.Add(veiculo);
         }
 
+        public void Excluir(string id)
+        {
+            var objPesquisa = PesquisarPorId(id);
+            ContextDataFake.Veiculos.Remove(objPesquisa);
+        }
+
         public List<VeiculoDto> Listar()
         {
             var veiculos = ContextDataFake.Veiculos;

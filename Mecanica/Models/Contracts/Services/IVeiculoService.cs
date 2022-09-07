@@ -10,9 +10,8 @@ namespace Mecanica.Models.Contracts.Services
     {
         void Cadastrar(VeiculoDto veiculo);
         List<VeiculoDto> Listar();
-
         VeiculoDto PesquisarPorId(string id);
-
         void Atualizar(VeiculoDto veiculo);
+        void Excluir(string id);
     }
 }

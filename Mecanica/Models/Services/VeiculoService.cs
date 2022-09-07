@@ -35,6 +35,18 @@ namespace Mecanica.Models.Services
             catch (Exception ex) { throw ex; }
         }
 
+        public void Excluir(string id)
+        {
+            try
+            {
+                _veiculoRepository.Excluir(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<VeiculoDto> Listar()
         {
             try

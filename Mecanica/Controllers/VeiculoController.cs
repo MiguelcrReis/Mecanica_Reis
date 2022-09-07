@@ -41,7 +41,7 @@ namespace Mecanica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Fabricante, Modelo, AnoFabricacao, AnoModelo, Combustivel, Cor")] VeiculoDto veiculo)
+        public IActionResult Create([Bind("Placa, Fabricante, Modelo, AnoFabricacao, AnoModelo, Combustivel, Cor")] VeiculoDto veiculo)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Mecanica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id, Fabricante, Modelo, AnoFabricacao, AnoModelo, Combustivel, Cor")] VeiculoDto veiculo)
+        public IActionResult Edit([Bind("Id, Placa, Fabricante, Modelo, AnoFabricacao, AnoModelo, Combustivel, Cor")] VeiculoDto veiculo)
         {
             if (string.IsNullOrEmpty(veiculo.Id))
                 return NotFound();
@@ -91,6 +91,26 @@ namespace Mecanica.Controllers
                 return NotFound();
 
             return View(veiculo);
+        }
+
+        public IActionResult Delete(string? id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return NotFound();
+
+            var veiculo = _veiculoService.PesquisarPorId(id);
+
+            if (veiculo == null)
+                return NotFound();
+
+            return View(veiculo);
+        }
+
+        [HttpPost]
+        public IActionResult Delete([Bind("Id, Placa, Fabricante, Modelo, AnoFabricacao, AnoModelo, Combustivel, Cor")] VeiculoDto veiculo)
+        {
+            _veiculoService.Excluir(veiculo.Id);
+            return RedirectToAction("List");
         }
     }
 }
