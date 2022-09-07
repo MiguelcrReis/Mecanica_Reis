@@ -16,6 +16,7 @@ namespace Mecanica.Models.Repositories
                 var objPesquisa = PesquisarPorId(veiculo.Id);
                 ContextDataFake.Veiculos.Remove(objPesquisa);
 
+                objPesquisa.Placa = veiculo.Placa;
                 objPesquisa.Fabricante = veiculo.Fabricante;
                 objPesquisa.Modelo = veiculo.Modelo;
                 objPesquisa.AnoFabricacao = veiculo.AnoFabricacao;

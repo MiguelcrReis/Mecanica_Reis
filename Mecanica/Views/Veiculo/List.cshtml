@@ -4,16 +4,17 @@
 	ViewData["Title"] = "List";
 }
 
-<h1>List</h1>
-
-<p>
-	<a asp-action="Create">Cadastrar um novo veículo</a>
+<h1>Veículos Cadastrados</h1>
+	<a asp-action="Create">Cadastrar veículo</a>
 </p>
 <table class="table">
 	<thead>
 		<tr>
-			<th>
+			@*<th>
 				@Html.DisplayNameFor(model => model.Id)
+			</th>*@
+			<th>
+				@Html.DisplayNameFor(model =>model.Placa)
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.Fabricante)
@@ -40,8 +41,11 @@
 		@foreach (var item in Model)
 		{
 			<tr>
-				<td>
+				@*<td>
 					@Html.DisplayFor(modelItem => item.Id)
+				</td>*@
+				<td>
+					@Html.DisplayFor(modelItem => item.Placa)
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.Fabricante)
@@ -63,8 +67,8 @@
 					</td>*@
 				<td>
 					@Html.ActionLink("Atualizar", "Edit", new { id = item.Id }) |
-					@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-					@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+					@Html.ActionLink("Detalhes", "Details", new { id = item.Id  }) |
+					@Html.ActionLink("Excluir", "Delete", new { id = item.Id  })
 				</td>
 			</tr>
 		}

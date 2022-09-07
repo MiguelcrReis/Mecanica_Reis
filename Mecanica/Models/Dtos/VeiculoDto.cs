@@ -9,6 +9,7 @@ namespace Mecanica.Models.DTOS
     public class VeiculoDto : EntidadeBase
     {
         //public string Id { get; set; }
+        public string Placa { get; set; }
         public string Fabricante { get; set; }
         public string Modelo { get; set; }
         public int AnoFabricacao { get; set; }
@@ -21,15 +22,16 @@ namespace Mecanica.Models.DTOS
 
         }
 
-        public VeiculoDto(string id, string fabricante, string modelo, int anoFabricacao, int anoModelo, string combustivel, string cor)
-            : this(fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor)
+        public VeiculoDto(string id, string placa, string fabricante, string modelo, int anoFabricacao, int anoModelo, string combustivel, string cor)
+            : this(placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor)
         {
             this.Id = id;
 
         }
 
-        public VeiculoDto(string fabricante, string modelo, int anoFabricacao, int anoModelo, string combustivel, string cor)
+        public VeiculoDto(string placa, string fabricante, string modelo, int anoFabricacao, int anoModelo, string combustivel, string cor)
         {
+            this.Placa = placa;
             this.Fabricante = fabricante;
             this.Modelo = modelo;
             this.AnoFabricacao = anoFabricacao;
