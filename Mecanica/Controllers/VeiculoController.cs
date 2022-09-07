@@ -79,5 +79,18 @@ namespace Mecanica.Controllers
             }
             catch (Exception ex) { throw ex; }
         }
+
+        public IActionResult Details(string? id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return NotFound();
+
+            var veiculo = _veiculoService.PesquisarPorId(id);
+
+            if (veiculo == null)
+                return NotFound();
+
+            return View(veiculo);
+        }
     }
 }
