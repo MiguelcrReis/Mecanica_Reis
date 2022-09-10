@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Mecanica.Models.Contracts.Repositories;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mecanica.Models.Contracts.Repositories
+namespace Mecanica.Models.Repositories
 {
     public class ConnectionManager : IConnectionManager
     {
