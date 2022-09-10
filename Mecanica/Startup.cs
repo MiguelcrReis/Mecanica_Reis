@@ -1,3 +1,4 @@
+using Mecanica.Models.Contracts.Contexts;
 using Mecanica.Models.Contracts.Repositories;
 using Mecanica.Models.Contracts.Services;
 using Mecanica.Models.Repositories;
@@ -28,6 +29,9 @@ namespace Mecanica
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<IContextData, ContextDataFake>();
+            services.AddSingleton<IConnectionManager, ConnectionManager>();
 
             services.AddScoped<IVeiculoRepository, VeiculoRepository>();
             services.AddScoped<IVeiculoService, VeiculoService>();
