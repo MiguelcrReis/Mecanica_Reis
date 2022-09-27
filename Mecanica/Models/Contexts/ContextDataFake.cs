@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mecanica.Models.Repositories
+namespace Mecanica.Models.Contexts
 {
     public class ContextDataFake : IContextData
     {
