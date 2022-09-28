@@ -19,15 +19,15 @@ namespace Mecanica.Models.Repositories
                     break;
 
                 case TSql.LISTAR_VEICULO:
-                    sql = "SELECT * FROM Veiculo ORDER BY fabricante";
+                    sql = "SELECT * FROM Veiculo ORDER BY Placa";
                     break;
 
                 case TSql.PESQUISAR_VEICULO:
-                    sql = "SELECT * FROM Veiculo WHERE id = @id ORDER BY fabricante";
+                    sql = "SELECT * FROM Veiculo WHERE id = @id ORDER BY Placa";
                     break;
 
                 case TSql.ATUALIZAR_VEICULO:
-                    sql = "anoModelo = @anoModelo, combustivel = @combustivel, cor = @cor FROM Veiculo WHERE id = @id ";
+                    sql = "UPDATE Veiculo SET anoModelo = @anoModelo, combustivel = @combustivel, cor = @cor FROM Veiculo WHERE id = @id";
                     break;
 
                 case TSql.EXCLUIR_VEICULO:

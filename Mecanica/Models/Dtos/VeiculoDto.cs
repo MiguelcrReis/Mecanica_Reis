@@ -2,18 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Mecanica.Models.DTOS
 {
     public class VeiculoDto : EntidadeBase
     {
-        //public string Id { get; set; }
+        public string Id { get; set; }
         public string Placa { get; set; }
         public string Fabricante { get; set; }
         public string Modelo { get; set; }
-        public int AnoFabricacao { get; set; }
-        public int AnoModelo { get; set; }
+        public DateTime AnoFabricacao { get; set; }
+        public DateTime AnoModelo { get; set; }
         public string Combustivel { get; set; }
         public string Cor { get; set; }
 
@@ -22,14 +23,14 @@ namespace Mecanica.Models.DTOS
 
         }
 
-        public VeiculoDto(string id, string placa, string fabricante, string modelo, int anoFabricacao, int anoModelo, string combustivel, string cor)
+        public VeiculoDto(string id, string placa, string fabricante, string modelo, DateTime anoFabricacao, DateTime anoModelo, string combustivel, string cor)
             : this(placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor)
         {
             this.Id = id;
 
         }
 
-        public VeiculoDto(string placa, string fabricante, string modelo, int anoFabricacao, int anoModelo, string combustivel, string cor)
+        public VeiculoDto(string placa, string fabricante, string modelo, DateTime anoFabricacao, DateTime anoModelo, string combustivel, string cor)
         {
             this.Placa = placa;
             this.Fabricante = fabricante;

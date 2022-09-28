@@ -109,12 +109,12 @@ namespace Mecanica.Models.Contexts
                     var placa = colunas[1].ToString();
                     var fabricante = colunas[2].ToString();
                     var modelo = colunas[3].ToString();
-                    var anoFabricacao = Int32.Parse(colunas[4].ToString());
-                    var anoModelo = Int32.Parse(colunas[5].ToString());
+                    var anoFabricacao = DateTime.Parse(colunas[4].ToString());
+                    var anoModelo = DateTime.Parse(colunas[5].ToString());
                     var combustivel = colunas[6].ToString();
                     var cor = colunas[7].ToString();
 
-                    var veiculo = new VeiculoDto(placa, id, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor);
+                    var veiculo = new VeiculoDto(id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor);
                     veiculos.Add(veiculo);
                 }
 
@@ -149,12 +149,12 @@ namespace Mecanica.Models.Contexts
                     var placa = colunas[1].ToString();
                     var fabricante = colunas[2].ToString();
                     var modelo = colunas[3].ToString();
-                    var anoFabricacao = int.Parse(colunas[4].ToString());
-                    var anoModelo = int.Parse(colunas[5].ToString());
+                    var anoFabricacao = DateTime.Parse(colunas[4].ToString());
+                    var anoModelo = DateTime.Parse(colunas[5].ToString());
                     var combustivel = colunas[6].ToString();
                     var cor = colunas[7].ToString();
 
-                    veiculo = new VeiculoDto(placa, id, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor);
+                    veiculo = new VeiculoDto(id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor);
                 }
 
                 adapter = null; dataset = null;

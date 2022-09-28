@@ -76,15 +76,15 @@ namespace Mecanica.Models.Contexts
 
         private void InitializeData()
         {
-            var veiculo = new VeiculoDto("AAA1234", "Volkswagen", "GOL 1.6", 2018, 2018, "Flex", "Azul-Marinho");
+            var veiculo = new VeiculoDto("AAA1234", "Volkswagen", "GOL 1.6", new DateTime(2018), new DateTime(2018), "Flex", "Azul-Marinho");
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("BBB1234", "Chevrolet", "Onix 1.4", 2017, 2018, "Flex", "Prata");
+            veiculo = new VeiculoDto("BBB1234", "Chevrolet", "Onix 1.4", new DateTime(2017), new DateTime(2018), "Flex", "Prata");
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("CCC1234", "Fiat", "Uno 900", 1999, 2000, "Flex", "Roxo");
+            veiculo = new VeiculoDto("CCC1234", "Fiat", "Uno 900", new DateTime(1999), new DateTime(2000), "Flex", "Roxo");
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("DDD1234", "Honda", "Civic 2.0", 2022, 2023, "Flex", "Vermelho");
+            veiculo = new VeiculoDto("DDD1234", "Honda", "Civic 2.0", new DateTime(2022), new DateTime(2023), "Flex", "Vermelho");
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("EEE1234", "Renault", "Logan 1.0", 2020, 2020, "Flex", "Branco");
+            veiculo = new VeiculoDto("EEE1234", "Renault", "Logan 1.0", new DateTime(2020), new DateTime(2020), "Flex", "Branco");
             veiculos.Add(veiculo);
         }
     }
