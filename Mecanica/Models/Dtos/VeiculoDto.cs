@@ -9,6 +9,7 @@ namespace Mecanica.Models.DTOS
 {
     public class VeiculoDto : EntidadeBase
     {
+        #region Parametros da Classe
         public string Id { get; set; }
         public string Placa { get; set; }
         public string Fabricante { get; set; }
@@ -17,7 +18,9 @@ namespace Mecanica.Models.DTOS
         public DateTime AnoModelo { get; set; }
         public string Combustivel { get; set; }
         public string Cor { get; set; }
+        #endregion
 
+        #region Construtores da Classe
         public VeiculoDto()
         {
 
@@ -40,5 +43,6 @@ namespace Mecanica.Models.DTOS
             this.Combustivel = combustivel;
             this.Cor = cor;
         }
+        #endregion
     }
 }
