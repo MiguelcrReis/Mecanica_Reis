@@ -1,6 +1,6 @@
 ﻿using Mecanica.Models.Entidades;
 
-namespace Mecanica.Models.Dtos
+namespace Mecanica.Models.DTOS
 {
     public class ClienteDto : EntidadeBase
     {
