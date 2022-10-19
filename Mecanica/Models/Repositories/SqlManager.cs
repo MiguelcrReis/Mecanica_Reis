@@ -15,15 +15,16 @@ namespace Mecanica.Models.Repositories
             switch (tsql)
             {
                 case TSql.CADASTRAR_VEICULO:
-                    sql = "INSERT INTO Veiculo (id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor) VALUES (@id, @placa, @fabricante, @modelo, @anoFabricacao, @anoModelo, @combustivel, @cor)";
+                    sql = "INSERT INTO Veiculo (id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor) " +
+                        "VALUES (CONVERT(binary(36), @id), @placa, @fabricante, @modelo, @anoFabricacao, @anoModelo, @combustivel, @cor)";
                     break;
 
                 case TSql.LISTAR_VEICULO:
-                    sql = "SELECT * FROM Veiculo ORDER BY Placa";
+                    sql = "SELECT CONVERT(varchar(36), id) 'id', placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor FROM Veiculo ORDER BY Placa";
                     break;
 
                 case TSql.PESQUISAR_VEICULO:
-                    sql = "SELECT * FROM Veiculo WHERE id = @id ORDER BY Placa";
+                    sql = "SELECT CONVERT(varchar(36), id) 'id', placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor FROM Veiculo WHERE id = @id ORDER BY Placa";
                     break;
 
                 case TSql.ATUALIZAR_VEICULO:
