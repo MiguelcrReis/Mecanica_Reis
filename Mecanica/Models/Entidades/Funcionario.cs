@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 
-namespace Mecanica.Models.Dtos
+namespace Mecanica.Models.Entidades
 {
-    public class FuncionarioDto
+    public class Funcionario
     {
         #region Parametros da Classe
         public string Id { get; set; }
@@ -14,7 +14,7 @@ namespace Mecanica.Models.Dtos
         #endregion
 
         #region Construtores da Classe
-        public FuncionarioDto()
+        public Funcionario()
         {
 
         }

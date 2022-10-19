@@ -1,6 +1,6 @@
-﻿namespace Mecanica.Models.Dtos
+﻿namespace Mecanica.Models.Entidades
 {
-    public class MaterialDto
+    public class Material
     {
         #region Parametros da Classe
         public string Id { get; set; }
@@ -12,17 +12,17 @@
         #endregion
 
         #region Construtores da Classe
-        public MaterialDto()
+        public Material()
         {
         }
 
-        public MaterialDto(string id, string descricao, string marca, decimal valorCompra, decimal valorVenda, string codProduto) 
-        :this(descricao, marca, valorCompra, valorVenda, codProduto)
+        public Material(string id, string descricao, string marca, decimal valorCompra, decimal valorVenda, string codProduto)
+        : this(descricao, marca, valorCompra, valorVenda, codProduto)
         {
-            this.Id = id;
+            Id = id;
         }
 
-        public MaterialDto(string descricao, string marca, decimal valorCompra, decimal valorVenda, string codProduto)
+        public Material(string descricao, string marca, decimal valorCompra, decimal valorVenda, string codProduto)
         {
             Descricao = descricao;
             Marca = marca;

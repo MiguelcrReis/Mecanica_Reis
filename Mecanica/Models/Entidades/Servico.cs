@@ -1,6 +1,6 @@
-﻿namespace Mecanica.Models.Dtos
+﻿namespace Mecanica.Models.Entidades
 {
-    public class ServicoDto
+    public class Servico
     {
         #region Parametros da Classe
         public string Id { get; set; }
@@ -9,7 +9,7 @@
         #endregion
 
         #region Construtores da Classe
-        public ServicoDto() { }
+        public Servico() { }
 
 
         #endregion
