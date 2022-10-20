@@ -1,7 +1,6 @@
 ﻿using Mecanica.Models.Contracts.Repositories;
 using Mecanica.Models.Contracts.Services;
-using Mecanica.Models.DTOS;
-using Mecanica.Models.Repositories;
+using Mecanica.Models.Entidades;
 using System;
 using System.Collections.Generic;
 
@@ -19,7 +18,7 @@ namespace Mecanica.Models.Services
         #endregion
 
         #region Atualizar Cliente
-        public void Atualizar(ClienteDto cliente)
+        public void Atualizar(Cliente cliente)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace Mecanica.Models.Services
         #endregion
 
         #region Cadastrar Cliente
-        public void Cadastrar(ClienteDto cliente)
+        public void Cadastrar(Cliente cliente)
         {
             try
             {
@@ -55,7 +54,7 @@ namespace Mecanica.Models.Services
         #endregion
 
         #region Listar Cliente
-        public List<ClienteDto> Listar()
+        public List<Cliente> Listar()
         {
             try
             {
@@ -66,7 +65,7 @@ namespace Mecanica.Models.Services
         #endregion
 
         #region Pesquisar Cliente por Id
-        public ClienteDto PesquisarPorId(string id)
+        public Cliente PesquisarPorId(string id)
         {
             try
             {

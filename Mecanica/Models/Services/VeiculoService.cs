@@ -25,7 +25,8 @@ namespace Mecanica.Models.Services
         {
             try
             {
-                _veiculoRepository.Atualizar(veiculo);
+                var objVeiculo = veiculo.ConverterParaEntidade();
+                _veiculoRepository.Atualizar(objVeiculo);
             }
             catch (Exception ex) { throw ex; }
         }
@@ -36,7 +37,8 @@ namespace Mecanica.Models.Services
         {
             try
             {
-                _veiculoRepository.Cadastrar(veiculo);
+                var objVeiculo = veiculo.ConverterParaEntidade();
+                _veiculoRepository.Cadastrar(objVeiculo);
             }
             catch (Exception ex) { throw ex; }
         }
@@ -61,7 +63,14 @@ namespace Mecanica.Models.Services
         {
             try
             {
-                return _veiculoRepository.Listar();
+                var veiculosDto = new List<VeiculoDto>();
+                var veiculos = _veiculoRepository.Listar();
+                foreach (var item in veiculos)
+                {
+                    veiculosDto.Add(item.ConverterParaDto());
+                }
+
+                return veiculosDto;
             }
             catch (Exception ex) { throw ex; }
         }
@@ -72,7 +81,8 @@ namespace Mecanica.Models.Services
         {
             try
             {
-                return _veiculoRepository.PesquisarPorId(id);
+                var veiculo = _veiculoRepository.PesquisarPorId(id);
+                return veiculo.ConverterParaDto();
             }
             catch (Exception ex) { throw ex; }
         }
