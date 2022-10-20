@@ -76,15 +76,15 @@ namespace Mecanica.Models.Contexts
 
         private void InitializeData()
         {
-            var veiculo = new VeiculoDto("AAA1234", "Volkswagen", "GOL 1.6", new DateTime(2018), new DateTime(2018), "Flex", "Azul-Marinho");
+            var veiculo = new VeiculoDto { Placa = "AAA1234", Fabricante = "Volkswagen", Modelo = "GOL 1.6", AnoFabricacao = 2018, AnoModelo = 2018, Combustivel = "Flex", Cor = "Azul-Marinho" };
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("BBB1234", "Chevrolet", "Onix 1.4", new DateTime(2017), new DateTime(2018), "Flex", "Prata");
+            veiculo = new VeiculoDto { Placa = "BBB1234", Fabricante = "Chevrolet", Modelo = "Onix 1.4", AnoFabricacao = 2017, AnoModelo = 2018, Combustivel = "Flex", Cor = "Prata" };
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("CCC1234", "Fiat", "Uno 900", new DateTime(1999), new DateTime(2000), "Flex", "Roxo");
+            veiculo = new VeiculoDto { Placa = "CCC1234", Fabricante = "Fiat", Modelo = "Uno 900", AnoFabricacao = 1999, AnoModelo = 2000, Combustivel = "Flex", Cor = "Roxo" };
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("DDD1234", "Honda", "Civic 2.0", new DateTime(2022), new DateTime(2023), "Flex", "Vermelho");
+            veiculo = new VeiculoDto { Placa = "DDD1234", Fabricante = "Honda", Modelo = "Civic 2.0", AnoFabricacao = 2022, AnoModelo = 2023, Combustivel = "Flex", Cor = "Vermelho" };
             veiculos.Add(veiculo);
-            veiculo = new VeiculoDto("EEE1234", "Renault", "Logan 1.0", new DateTime(2020), new DateTime(2020), "Flex", "Branco");
+            veiculo = new VeiculoDto { Placa = "EEE1234", Fabricante = "Renault", Modelo = "Logan 1.0", AnoFabricacao = 2020, AnoModelo = 2020, Combustivel = "Flex", Cor = "Branco" };
             veiculos.Add(veiculo);
         }
     }

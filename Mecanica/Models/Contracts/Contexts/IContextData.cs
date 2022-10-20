@@ -1,4 +1,4 @@
-﻿using Mecanica.Models.DTOS;
+﻿using Mecanica.Models.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,10 @@ namespace Mecanica.Models.Contracts.Contexts
 {
     public interface IContextData
     {
-        void Cadastrar(VeiculoDto veiculo);
-        List<VeiculoDto> Listar();
-        VeiculoDto PesquisarPorId(string id);
-        void Atualizar(VeiculoDto veiculo);
+        void Cadastrar(Veiculo veiculo);
+        List<Veiculo> Listar();
+        Veiculo PesquisarPorId(string id);
+        void Atualizar(Veiculo veiculo);
         void Excluir(string id);
     }
 }

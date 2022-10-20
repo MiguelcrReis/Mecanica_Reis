@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Mecanica.Models.DTOS
 {
-    public class VeiculoDto : EntidadeBase
+    public class VeiculoDto
     {
         #region Parametros da Classe
         public string Id { get; set; }
         public string Placa { get; set; }
         public string Fabricante { get; set; }
         public string Modelo { get; set; }
-        public DateTime AnoFabricacao { get; set; }
-        public DateTime AnoModelo { get; set; }
+        public int AnoFabricacao { get; set; }
+        public int AnoModelo { get; set; }
         public string Combustivel { get; set; }
         public string Cor { get; set; }
         #endregion
@@ -26,23 +26,21 @@ namespace Mecanica.Models.DTOS
 
         }
 
-        public VeiculoDto(string id, string placa, string fabricante, string modelo, DateTime anoFabricacao, DateTime anoModelo, string combustivel, string cor)
-            : this(placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor)
+        public Veiculo ConverterParaEntidade()
         {
-            this.Id = id;
-
+            return new Veiculo
+            {
+                Id = this.Id,
+                Placa = this.Placa,
+                Fabricante = this.Fabricante,
+                Modelo = this.Modelo,
+                AnoFabricacao = this.AnoFabricacao,
+                AnoModelo = this.AnoModelo,
+                Combustivel = this.Combustivel,
+                Cor = this.Cor
+            };
         }
 
-        public VeiculoDto(string placa, string fabricante, string modelo, DateTime anoFabricacao, DateTime anoModelo, string combustivel, string cor)
-        {
-            this.Placa = placa;
-            this.Fabricante = fabricante;
-            this.Modelo = modelo;
-            this.AnoFabricacao = anoFabricacao;
-            this.AnoModelo = anoModelo;
-            this.Combustivel = combustivel;
-            this.Cor = cor;
-        }
         #endregion
     }
 }

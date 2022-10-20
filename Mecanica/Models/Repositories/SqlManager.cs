@@ -15,24 +15,24 @@ namespace Mecanica.Models.Repositories
             switch (tsql)
             {
                 case TSql.CADASTRAR_VEICULO:
-                    sql = "INSERT INTO Veiculo (id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor) " +
+                    sql = "INSERT INTO Veiculos (id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor) " +
                         "VALUES (CONVERT(binary(36), @id), @placa, @fabricante, @modelo, @anoFabricacao, @anoModelo, @combustivel, @cor)";
                     break;
 
                 case TSql.LISTAR_VEICULO:
-                    sql = "SELECT CONVERT(varchar(36), id) 'id', placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor FROM Veiculo ORDER BY Placa";
+                    sql = "SELECT CONVERT(varchar(36), id) 'id', placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor FROM Veiculos ORDER BY Placa";
                     break;
 
                 case TSql.PESQUISAR_VEICULO:
-                    sql = "SELECT CONVERT(varchar(36), id) 'id', placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor FROM Veiculo WHERE id = @id ORDER BY Placa";
+                    sql = "SELECT CONVERT(varchar(36), id) 'id', placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor FROM Veiculos WHERE id = @id ORDER BY Placa";
                     break;
 
                 case TSql.ATUALIZAR_VEICULO:
-                    sql = "UPDATE Veiculo SET anoModelo = @anoModelo, combustivel = @combustivel, cor = @cor FROM Veiculo WHERE id = @id";
+                    sql = "UPDATE Veiculos SET anoModelo = @anoModelo, combustivel = @combustivel, cor = @cor FROM Veiculos WHERE id = @id";
                     break;
 
                 case TSql.EXCLUIR_VEICULO:
-                    sql = "DELETE FROM Veiculo WHERE id = @id";
+                    sql = "DELETE FROM Veiculos WHERE id = @id";
                     break;
             }
 

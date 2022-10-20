@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mecanica.Models.DTOS;
+using System;
 
 namespace Mecanica.Models.Entidades
 {
@@ -8,10 +9,33 @@ namespace Mecanica.Models.Entidades
         public string Placa { get; set; }
         public string Fabricante { get; set; }
         public string Modelo { get; set; }
-        public DateTime AnoFabricacao { get; set; }
-        public DateTime AnoModelo { get; set; }
+        public int AnoFabricacao { get; set; }
+        public int AnoModelo { get; set; }
         public string Combustivel { get; set; }
         public string Cor { get; set; }
+        #endregion
+
+        #region Construtores da Classe
+        public Veiculo()
+            : base()
+        {
+
+        }
+
+        public VeiculoDto ConverterParaDto()
+        {
+            return new VeiculoDto
+            {
+                Id = this.Id,
+                Placa = this.Placa,
+                Fabricante = this.Fabricante,
+                Modelo = this.Modelo,
+                AnoFabricacao = this.AnoFabricacao,
+                AnoModelo = this.AnoModelo,
+                Combustivel = this.Combustivel,
+                Cor = this.Cor
+            };
+        }
         #endregion
     }
 }

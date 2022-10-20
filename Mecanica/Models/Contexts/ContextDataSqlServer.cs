@@ -1,6 +1,7 @@
 ﻿using Mecanica.Models.Contracts.Contexts;
 using Mecanica.Models.Contracts.Repositories;
 using Mecanica.Models.DTOS;
+using Mecanica.Models.Entidades;
 using Mecanica.Models.Enums;
 using Mecanica.Models.Repositories;
 using Microsoft.VisualBasic;
@@ -23,7 +24,7 @@ namespace Mecanica.Models.Contexts
             _connection = connectionManager.GetConnection();
         }
 
-        public void Atualizar(VeiculoDto veiculo)
+        public void Atualizar(Veiculo veiculo)
         {
             try
             {
@@ -47,7 +48,7 @@ namespace Mecanica.Models.Contexts
             finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
         }
 
-        public void Cadastrar(VeiculoDto veiculo)
+        public void Cadastrar(Veiculo veiculo)
         {
             try
             {
@@ -88,9 +89,9 @@ namespace Mecanica.Models.Contexts
             finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
         }
 
-        public List<VeiculoDto> Listar()
+        public List<Veiculo> Listar()
         {
-            var veiculos = new List<VeiculoDto>();
+            var veiculos = new List<Veiculo>();
             try
             {
                 var query = SqlManager.GetSql(TSql.LISTAR_VEICULO);
@@ -109,12 +110,22 @@ namespace Mecanica.Models.Contexts
                     var placa = colunas[1].ToString();
                     var fabricante = colunas[2].ToString();
                     var modelo = colunas[3].ToString();
-                    var anoFabricacao = DateTime.Parse(colunas[4].ToString());
-                    var anoModelo = DateTime.Parse(colunas[5].ToString());
+                    var anoFabricacao = int.Parse(colunas[4].ToString());
+                    var anoModelo = int.Parse(colunas[5].ToString());
                     var combustivel = colunas[6].ToString();
                     var cor = colunas[7].ToString();
 
-                    var veiculo = new VeiculoDto(id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor);
+                    var veiculo = new Veiculo
+                    {
+                        Id = id,
+                        Placa = placa,
+                        Fabricante = fabricante,
+                        Modelo = modelo,
+                        AnoFabricacao = anoFabricacao,
+                        AnoModelo = anoModelo,
+                        Combustivel = combustivel,
+                        Cor = cor
+                    };
                     veiculos.Add(veiculo);
                 }
 
@@ -125,9 +136,9 @@ namespace Mecanica.Models.Contexts
             catch (Exception ex) { throw ex; }
         }
 
-        public VeiculoDto PesquisarPorId(string id)
+        public Veiculo PesquisarPorId(string id)
         {
-            VeiculoDto veiculo = new VeiculoDto();
+            Veiculo veiculo = new Veiculo();
             try
             {
                 var query = SqlManager.GetSql(TSql.PESQUISAR_VEICULO);
@@ -149,12 +160,22 @@ namespace Mecanica.Models.Contexts
                     var placa = colunas[1].ToString();
                     var fabricante = colunas[2].ToString();
                     var modelo = colunas[3].ToString();
-                    var anoFabricacao = DateTime.Parse(colunas[4].ToString());
-                    var anoModelo = DateTime.Parse(colunas[5].ToString());
+                    var anoFabricacao = int.Parse(colunas[4].ToString());
+                    var anoModelo = int.Parse(colunas[5].ToString());
                     var combustivel = colunas[6].ToString();
                     var cor = colunas[7].ToString();
 
-                    veiculo = new VeiculoDto(id, placa, fabricante, modelo, anoFabricacao, anoModelo, combustivel, cor);
+                    veiculo = new Veiculo
+                    {
+                        Id = id,
+                        Placa = placa,
+                        Fabricante = fabricante,
+                        Modelo = modelo,
+                        AnoFabricacao = anoFabricacao,
+                        AnoModelo = anoModelo,
+                        Combustivel = combustivel,
+                        Cor = cor
+                    };
                 }
 
                 adapter = null; dataset = null;
