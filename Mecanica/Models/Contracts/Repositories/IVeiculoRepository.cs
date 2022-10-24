@@ -8,10 +8,10 @@ namespace Mecanica.Models.Contracts.Repositories
 {
     public interface IVeiculoRepository
     {
-        void Cadastrar(Veiculo veiculo);
-        List<Veiculo> Listar();
-        Veiculo PesquisarPorId(string id);
-        void Atualizar(Veiculo veiculo);
-        void Excluir(string id);
+        void CadastrarVeiculo(Veiculo veiculo);
+        List<Veiculo> ListarVeiculo();
+        Veiculo PesquisarVeiculoPorId(string id);
+        void AtualizarVeiculo(Veiculo veiculo);
+        void ExcluirVeiculo(string id);
     }
 }

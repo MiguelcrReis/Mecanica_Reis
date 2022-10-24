@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Mecanica.Models.Dtos;
+using System;
 
 namespace Mecanica.Models.Entidades
 {
     public class Cliente : EntidadeBase
     {
         #region Parametros da Classe
-        public string Id { get; set; }
-        public Pessoa Pessoa { get; set; }
+        //public Pessoa Pessoa { get; set; }
+        public int Pessoa { get; set; }
         public bool Ativo { get; set; }
         public DateTime DataCadastro { get; set; }
-
         #endregion
 
         #region Construtores da Classe
@@ -51,6 +51,19 @@ namespace Mecanica.Models.Entidades
         //    Telefone = telefone;
         //}
         //#endregion
+        #endregion
+
+        #region Metodos 
+        public ClienteDto ConverteParaDto()
+        {
+            return new ClienteDto
+            {
+                Id = this.Id,
+                Pessoa = this.Pessoa,
+                Ativo = this.Ativo,
+                DataCadastro = this.DataCadastro
+            };
+        }
         #endregion
     }
 }

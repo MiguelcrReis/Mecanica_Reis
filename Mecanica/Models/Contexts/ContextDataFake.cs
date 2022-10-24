@@ -15,14 +15,15 @@ namespace Mecanica.Models.Contexts
         public ContextDataFake()
         {
             veiculos = new List<Veiculo>();
-            InitializeData();
+            InitializeDataVeiculo();
         }
 
-        public void Atualizar(Veiculo veiculo)
+        #region Veiculo
+        public void AtualizarVeiculo(Veiculo veiculo)
         {
             try
             {
-                var objPesquisa = PesquisarPorId(veiculo.Id);
+                var objPesquisa = PesquisarVeiculoPorId(veiculo.Id);
                 veiculos.Remove(objPesquisa);
 
                 objPesquisa.Placa = veiculo.Placa;
@@ -33,12 +34,12 @@ namespace Mecanica.Models.Contexts
                 objPesquisa.Combustivel = veiculo.Combustivel;
                 objPesquisa.Cor = veiculo.Cor;
 
-                Cadastrar(objPesquisa);
+                CadastrarVeiculo(objPesquisa);
             }
             catch (Exception ex) { throw ex; }
         }
 
-        public void Cadastrar(Veiculo veiculo)
+        public void CadastrarVeiculo(Veiculo veiculo)
         {
             try
             {
@@ -47,17 +48,17 @@ namespace Mecanica.Models.Contexts
             catch (Exception ex) { throw ex; }
         }
 
-        public void Excluir(string id)
+        public void ExcluirVeiculo(string id)
         {
             try
             {
-                var objPesquisa = PesquisarPorId(id);
+                var objPesquisa = PesquisarVeiculoPorId(id);
                 veiculos.Remove(objPesquisa);
             }
             catch (Exception ex) { throw ex; }
         }
 
-        public List<Veiculo> Listar()
+        public List<Veiculo> ListarVeiculo()
         {
             try
             {
@@ -66,7 +67,7 @@ namespace Mecanica.Models.Contexts
             catch (Exception ex) { throw ex; }
         }
 
-        public Veiculo PesquisarPorId(string id)
+        public Veiculo PesquisarVeiculoPorId(string id)
         {
             try
             {
@@ -75,7 +76,7 @@ namespace Mecanica.Models.Contexts
             catch (Exception ex) { throw ex; }
         }
 
-        private void InitializeData()
+        private void InitializeDataVeiculo()
         {
             var veiculo = new Veiculo { Placa = "AAA1234", Fabricante = "Volkswagen", Modelo = "GOL 1.6", AnoFabricacao = 2018, AnoModelo = 2018, Combustivel = "Flex", Cor = "Azul-Marinho" };
             veiculos.Add(veiculo);
@@ -88,5 +89,38 @@ namespace Mecanica.Models.Contexts
             veiculo = new Veiculo { Placa = "EEE1234", Fabricante = "Renault", Modelo = "Logan 1.0", AnoFabricacao = 2020, AnoModelo = 2020, Combustivel = "Flex", Cor = "Branco" };
             veiculos.Add(veiculo);
         }
+        #endregion
+
+        #region Cliente
+        public void AtualizarCliente(Cliente veiculo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CadastrarCliente(Cliente veiculo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExcluirCliente(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Cliente> ListarCliente()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Cliente PesquisarClientePorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InitializeDataCliente()
+        {
+
+        }
+        #endregion
     }
 }
