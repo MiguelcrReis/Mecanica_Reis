@@ -1,5 +1,6 @@
 ﻿using Mecanica.Models.Contracts.Repositories;
 using Mecanica.Models.Contracts.Services;
+using Mecanica.Models.Dtos;
 using Mecanica.Models.Entidades;
 using System;
 using System.Collections.Generic;
@@ -18,22 +19,24 @@ namespace Mecanica.Models.Services
         #endregion
 
         #region Atualizar Cliente
-        public void Atualizar(Cliente cliente)
+        public void Atualizar(ClienteDto cliente)
         {
             try
             {
-                _clienteRepository.Atualizar(cliente);
+                var objCliente = cliente.ConverteParaEntidade();
+                _clienteRepository.Atualizar(objCliente);
             }
             catch (Exception ex) { throw ex; }
         }
         #endregion
 
         #region Cadastrar Cliente
-        public void Cadastrar(Cliente cliente)
+        public void Cadastrar(ClienteDto cliente)
         {
             try
             {
-                _clienteRepository.Cadastrar(cliente);
+                var objCliente = cliente.ConverteParaEntidade();
+                _clienteRepository.Cadastrar(objCliente);
             }
             catch (Exception ex) { throw ex; }
         }
@@ -54,22 +57,29 @@ namespace Mecanica.Models.Services
         #endregion
 
         #region Listar Cliente
-        public List<Cliente> Listar()
+        public List<ClienteDto> Listar()
         {
             try
             {
-                return _clienteRepository.Listar();
+                var clientesDto = new List<ClienteDto>();
+                var clientes = _clienteRepository.Listar();
+                foreach (var item in clientes)
+                {
+                    clientesDto.Add(item.ConverteParaDto());
+                }
+                return clientesDto;
             }
             catch (Exception ex) { throw ex; }
         }
         #endregion
 
         #region Pesquisar Cliente por Id
-        public Cliente PesquisarPorId(string id)
+        public ClienteDto PesquisarPorId(string id)
         {
             try
             {
-                return _clienteRepository.PesquisarPorId(id);
+                var cliente = _clienteRepository.PesquisarPorId(id);
+                return cliente.ConverteParaDto();
             }
             catch (Exception ex) { throw ex; }
         }

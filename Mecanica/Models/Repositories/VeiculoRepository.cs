@@ -18,27 +18,27 @@ namespace Mecanica.Models.Repositories
             _contextData = contextData;
         }
 
-        public void AtualizarVeiculo(Veiculo veiculo)
+        public void Atualizar(Veiculo veiculo)
         {
             _contextData.AtualizarVeiculo(veiculo);
         }
 
-        public void CadastrarVeiculo(Veiculo veiculo)
+        public void Cadastrar(Veiculo veiculo)
         {
             _contextData.CadastrarVeiculo(veiculo);
         }
 
-        public void ExcluirVeiculo(string id)
+        public void Excluir(string id)
         {
             _contextData.ExcluirVeiculo(id);
         }
 
-        public List<Veiculo> ListarVeiculo()
+        public List<Veiculo> Listar()
         {
             return _contextData.ListarVeiculo();
         }
 
-        public Veiculo PesquisarVeiculoPorId(string id)
+        public Veiculo PesquisarPorId(string id)
         {
             return _contextData.PesquisarVeiculoPorId(id);
         }
