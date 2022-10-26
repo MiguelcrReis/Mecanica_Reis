@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Mecanica.Models.Contracts.Repositories
 {
-    public interface IVeiculoRepository
+    public interface IVeiculoRepository : IRepository<Veiculo, string>
     {
-        void Cadastrar(Veiculo veiculo);
-        List<Veiculo> Listar();
-        Veiculo PesquisarPorId(string id);
-        void Atualizar(Veiculo veiculo);
-        void Excluir(string id);
+
     }
 }
