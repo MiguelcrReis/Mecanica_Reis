@@ -31,13 +31,22 @@ namespace Mecanica
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton<IContextData, ContextDataFake>();
-            services.AddSingleton<IConnectionManager, ConnectionManager>();
-
-            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
-            services.AddScoped<IVeiculoService, VeiculoService>();
+            AddDependenciesRepositories(services);
+            AddDependenciesServices(services);
 
             ConfigureDatasource(services);
+        }
+
+        public void AddDependenciesRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+            services.AddScoped<IClienteRepository, IClienteRepository>();
+        }
+
+        public void AddDependenciesServices(IServiceCollection services)
+        {
+            services.AddScoped<IVeiculoService, VeiculoService>();
+            services.AddScoped<IClienteService, ClienteService>();
         }
 
         public void ConfigureDatasource(IServiceCollection services)
@@ -52,7 +61,7 @@ namespace Mecanica
 
                 case "SqlServer":
                     services.AddSingleton<IContextData, ContextDataSqlServer>();
-                    services.AddSingleton<IConnectionManager, ConnectionManager>(); 
+                    services.AddSingleton<IConnectionManager, ConnectionManager>();
                     break;
             }
         }
