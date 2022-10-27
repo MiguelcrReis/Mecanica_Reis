@@ -12,6 +12,10 @@ namespace Mecanica.Models.Dtos
         public DateTime DataCadastro { get; set; }
         #endregion
 
+        #region Construtores
+        public ClienteDto() { }
+        #endregion
+
         #region Metodos
         public Cliente ConverteParaEntidade()
         {

@@ -5,12 +5,7 @@ using System.Collections.Generic;
 
 namespace Mecanica.Models.Contracts.Services
 {
-    public interface IClienteService
+    public interface IClienteService : IService<ClienteDto, string>
     {
-        void Cadastrar(ClienteDto cliente);
-        List<ClienteDto> Listar();
-        ClienteDto PesquisarPorId(string id);
-        void Atualizar(ClienteDto cliente);
-        void Excluir(string id);
     }
 }

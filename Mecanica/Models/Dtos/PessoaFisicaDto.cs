@@ -1,8 +1,8 @@
-﻿using Mecanica.Models.Dtos;
+﻿using Mecanica.Models.Entidades;
 
-namespace Mecanica.Models.Entidades
+namespace Mecanica.Models.Dtos
 {
-    public class PessoaFisica
+    public class PessoaFisicaDto
     {
         #region Parametros
         public int Id { get; set; }
@@ -12,13 +12,13 @@ namespace Mecanica.Models.Entidades
         #endregion
 
         #region Construtores
-        public PessoaFisica() { }
+        public PessoaFisicaDto() { }
         #endregion
 
         #region Metodos
-        public PessoaFisicaDto ConverteParaDto()
+        public PessoaFisica ConverteParaEntidade()
         {
-            return new PessoaFisicaDto
+            return new PessoaFisica
             {
                 Id = this.Id,
                 Pessoa = this.Pessoa,

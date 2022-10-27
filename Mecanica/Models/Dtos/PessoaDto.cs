@@ -1,10 +1,9 @@
-﻿using Mecanica.Models.Dtos;
+﻿using Mecanica.Models.Entidades;
 using System;
-using System.Data;
 
-namespace Mecanica.Models.Entidades
+namespace Mecanica.Models.Dtos
 {
-    public class Pessoa
+    public class PessoaDto
     {
         #region Parametros
         public int Id { get; set; }
@@ -15,19 +14,19 @@ namespace Mecanica.Models.Entidades
         #endregion
 
         #region Construtores
-        public Pessoa() { }
+        public PessoaDto() { }
         #endregion
 
         #region Metodos
-        public PessoaDto ConverteParaDto()
+        public Pessoa ConverteParaEntidade()
         {
-            return new PessoaDto
+            return new Pessoa
             {
-                Id = this.Id,
-                DataCadastro = this.DataCadastro,
-                Cliente = this.Cliente,
-                Colaborador = this.Colaborador,
-                Fornecedor = this.Fornecedor
+                Id = Id,
+                DataCadastro = DataCadastro,
+                Cliente = Cliente,
+                Colaborador = Colaborador,
+                Fornecedor = Fornecedor
             };
         }
         #endregion

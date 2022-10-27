@@ -2,7 +2,7 @@
 
 namespace Mecanica.Models.Contracts.Repositories
 {
-    public interface IPessoaRepositoryFisica : IRepository<PessoaFisica, int>
+    public interface IPessoaFisicaRepository : IRepository<PessoaFisica, int>
     {
     }
 }

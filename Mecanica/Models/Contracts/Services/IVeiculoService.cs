@@ -1,4 +1,5 @@
 ﻿using Mecanica.Models.DTOS;
+using Mecanica.Models.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mecanica.Models.Contracts.Services
 {
-    public interface IVeiculoService
+    public interface IVeiculoService : IService<VeiculoDto, string>
     {
-        void Cadastrar(VeiculoDto veiculo);
-        List<VeiculoDto> Listar();
-        VeiculoDto PesquisarPorId(string id);
-        void Atualizar(VeiculoDto veiculo);
-        void Excluir(string id);
     }
 }
