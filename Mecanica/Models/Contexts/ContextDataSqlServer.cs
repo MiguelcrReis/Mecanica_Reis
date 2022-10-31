@@ -343,7 +343,94 @@ namespace Mecanica.Models.Contexts
             }
             catch (Exception ex) { throw ex; }
         }
+
         #endregion
+
+        #endregion
+
+        #region Pessoa
+        public void CadastrarPessoa(Pessoa pessoa)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Pessoa> ListarPessoa()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Pessoa PesquisarPessoaPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AtualizarPessoa(Pessoa pessoa)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExcluirPessoa(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion 
+
+        #region Pessoa Juridica
+
+        public void CadastrarPessoaJuridica(PessoaJuridica pessoaJuridica)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PessoaJuridica> ListarPessoaJuridica()
+        {
+            throw new NotImplementedException();
+        }
+
+        public PessoaJuridica PesquisarPessoaJuridicaPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AtualizarPessoaJuridica(PessoaJuridica pessoaJuridica)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExcluirPessoaJuridica(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Pessoa Fisica
+
+        public void CadastrarPessoaFisica(PessoaFisica pessoaFisica)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PessoaFisica> ListarPessoaFisica()
+        {
+            throw new NotImplementedException();
+        }
+
+        public PessoaFisica PesquisarPessoaFisicaPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AtualizarPessoaFisica(PessoaFisica pessoaFisica)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExcluirPessoaFisica(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }
