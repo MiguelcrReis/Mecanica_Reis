@@ -1,4 +1,5 @@
-﻿using Mecanica.Models.Contracts.Repositories;
+﻿using Mecanica.Models.Contracts.Contexts;
+using Mecanica.Models.Contracts.Repositories;
 using Mecanica.Models.Entidades;
 using System.Collections.Generic;
 
@@ -6,29 +7,48 @@ namespace Mecanica.Models.Repositories
 {
     public class PessoaFisicaRepository : IPessoaFisicaRepository
     {
-        public void Atualizar(PessoaFisica entidade)
-        {
-            throw new System.NotImplementedException();
-        }
+        #region Instancias
+        private readonly IContextData _contextData;
 
-        public void Cadastrar(PessoaFisica entidade)
+        public PessoaFisicaRepository(IContextData contextData)
         {
-            throw new System.NotImplementedException();
+            _contextData = contextData;
         }
+        #endregion
 
+        #region Atualizar
+        public void Atualizar(PessoaFisica pessoaFisica)
+        {
+            _contextData.AtualizarPessoaFisica(pessoaFisica);
+        }
+        #endregion
+
+        #region Cadastrar
+        public void Cadastrar(PessoaFisica pessoaFisica)
+        {
+            _contextData.CadastrarPessoaFisica(pessoaFisica);
+        }
+        #endregion
+
+        #region Excluir
         public void Excluir(int id)
         {
-            throw new System.NotImplementedException();
+            _contextData.ExcluirPessoaFisica(id);
         }
+        #endregion
 
+        #region Listar
         public List<PessoaFisica> Listar()
         {
-            throw new System.NotImplementedException();
+            return _contextData.ListarPessoaFisica();
         }
+        #endregion
 
+        #region Pesquisar Por Id
         public PessoaFisica PesquisarPorId(int id)
         {
-            throw new System.NotImplementedException();
+            return _contextData.PesquisarPessoaFisicaPorId(id);
         }
+        #endregion
     }
 }
