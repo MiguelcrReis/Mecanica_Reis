@@ -12,12 +12,14 @@ namespace Mecanica.Models.Contexts
 {
     public class ContextDataSqlServer : IContextData
     {
+        #region Instancias
         private readonly SqlConnection _connection = null;
 
         public ContextDataSqlServer(IConnectionManager connectionManager)
         {
             _connection = connectionManager.GetConnection();
         }
+        #endregion
 
         #region Veiculo 
 
@@ -349,88 +351,330 @@ namespace Mecanica.Models.Contexts
         #endregion
 
         #region Pessoa
-        public void CadastrarPessoa(Pessoa pessoa)
-        {
-            throw new NotImplementedException();
-        }
 
-        public List<Pessoa> ListarPessoa()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Pessoa PesquisarPessoaPorId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        #region Atualizar Pessoa
         public void AtualizarPessoa(Pessoa pessoa)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.ATUALIZAR_PESSOA);
+                var command = new SqlCommand(query, _connection);
 
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoa.Id;
+                command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = pessoa.DataCadastro;
+                command.Parameters.Add("@pessoa", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
+                command.Parameters.Add("@colaborador", SqlDbType.Bit).Value = pessoa.Colaborador ? 1 : 0;
+                command.Parameters.Add("@fornecedor", SqlDbType.Bit).Value = pessoa.Fornecedor ? 1 : 0;
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Cadastrar Pessoa
+        public void CadastrarPessoa(Pessoa pessoa)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.CADASTRAR_PESSOA);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoa.Id;
+                command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = pessoa.DataCadastro;
+                command.Parameters.Add("@pessoa", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
+                command.Parameters.Add("@colaborador", SqlDbType.Bit).Value = pessoa.Colaborador ? 1 : 0;
+                command.Parameters.Add("@fornecedor", SqlDbType.Bit).Value = pessoa.Fornecedor ? 1 : 0;
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Listar Pessoa
+        public List<Pessoa> ListarPessoa()
+        {
+            var pessoas = new List<Pessoa>();
+            try
+            {
+                var query = SqlManager.GetSql(TSql.LISTAR_PESSOA);
+                var command = new SqlCommand(query, _connection);
+                var dataset = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataset);
+
+                var rows = dataset.Tables[0].Rows;
+
+                foreach (DataRow item in rows)
+                {
+                    var colunas = item.ItemArray;
+
+                    var id = int.Parse(colunas[0].ToString());
+                    var dataCadastro = DateTime.Parse(colunas[1].ToString());
+                    var cliente = bool.Parse(colunas[2].ToString());
+                    var colaborador = bool.Parse(colunas[3].ToString());
+                    var fornecedor = bool.Parse(colunas[4].ToString());
+
+                    var pessoa = new Pessoa
+                    {
+                        Id = id,
+                        DataCadastro = dataCadastro,
+                        Cliente = cliente,
+                        Colaborador = colaborador,
+                        Fornecedor = fornecedor
+                    };
+                    pessoas.Add(pessoa);
+                }
+
+                adapter = null; dataset = null;
+
+                return pessoas;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        #endregion
+
+        #region Pesquisar Pessoa Por Id
+        public Pessoa PesquisarPessoaPorId(int id)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Excluir Pessoa
         public void ExcluirPessoa(int id)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
 
-        #endregion 
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #endregion
 
         #region Pessoa Juridica
 
-        public void CadastrarPessoaJuridica(PessoaJuridica pessoaJuridica)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<PessoaJuridica> ListarPessoaJuridica()
-        {
-            throw new NotImplementedException();
-        }
-
-        public PessoaJuridica PesquisarPessoaJuridicaPorId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        #region Atualizar Pessoa Juridica
         public void AtualizarPessoaJuridica(PessoaJuridica pessoaJuridica)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
 
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Cadastrar Pessoa Juridica
+        public void CadastrarPessoaJuridica(PessoaJuridica pessoaJuridica)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Listar Pessoa Juridica
+        public List<PessoaJuridica> ListarPessoaJuridica()
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Pesquisar Pessoa Juridica Por Id
+        public PessoaJuridica PesquisarPessoaJuridicaPorId(int id)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Excluir Pessoa Juridica
         public void ExcluirPessoaJuridica(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
         }
+        #endregion
 
         #endregion
 
         #region Pessoa Fisica
 
-        public void CadastrarPessoaFisica(PessoaFisica pessoaFisica)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<PessoaFisica> ListarPessoaFisica()
-        {
-            throw new NotImplementedException();
-        }
-
-        public PessoaFisica PesquisarPessoaFisicaPorId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        #region Atualizar Pessoa Fisica
         public void AtualizarPessoaFisica(PessoaFisica pessoaFisica)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
 
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Cadastrar Pessoa Fisica
+        public void CadastrarPessoaFisica(PessoaFisica pessoaFisica)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Listar Pessoa Fisica
+        public List<PessoaFisica> ListarPessoaFisica()
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Pesquisar Pessoa Fisica Por Id
+        public PessoaFisica PesquisarPessoaFisicaPorId(int id)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Excluir Pessoa Fisica
         public void ExcluirPessoaFisica(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.);
+                var command = new SqlCommand(query, _connection);
+
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
         }
+        #endregion
 
         #endregion
     }
