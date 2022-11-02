@@ -7,7 +7,7 @@ namespace Mecanica.Models.Entidades
     {
         #region Parametros da Classe
         //public Pessoa Pessoa { get; set; }
-        public int Pessoa { get; set; }
+        public int IdPessoa { get; set; }
         public bool Ativo { get; set; }
         public DateTime DataCadastro { get; set; }
         #endregion
@@ -59,7 +59,7 @@ namespace Mecanica.Models.Entidades
             return new ClienteDto
             {
                 Id = this.Id,
-                Pessoa = this.Pessoa,
+                IdPessoa = this.IdPessoa,
                 Ativo = this.Ativo,
                 DataCadastro = this.DataCadastro
             };

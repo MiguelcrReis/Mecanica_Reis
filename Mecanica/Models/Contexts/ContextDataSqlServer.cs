@@ -175,7 +175,7 @@ namespace Mecanica.Models.Contexts
 
                     veiculo = new Veiculo
                     {
-                        Id = id,
+                        Id = id_veiculo,
                         Placa = placa,
                         Fabricante = fabricante,
                         Modelo = modelo,
@@ -209,7 +209,7 @@ namespace Mecanica.Models.Contexts
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
                 //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
                 command.Parameters.Add("@ativo", SqlDbType.Bit).Value = cliente.Ativo ? 1 : 0;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = cliente.DataCadastro;
 
@@ -232,7 +232,7 @@ namespace Mecanica.Models.Contexts
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
                 //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
                 command.Parameters.Add("@ativo", SqlDbType.Bit).Value = cliente.Ativo ? 1 : 0;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = cliente.DataCadastro;
 
@@ -282,14 +282,14 @@ namespace Mecanica.Models.Contexts
                     var colunas = item.ItemArray;
 
                     var id = colunas[0].ToString();
-                    var pessoa = int.Parse(colunas[1].ToString());
+                    var idPessoa = int.Parse(colunas[1].ToString());
                     var ativo = bool.Parse(colunas[2].ToString());
                     var dataCadastro = DateTime.Parse(colunas[3].ToString());
 
                     var cliente = new Cliente
                     {
                         Id = id,
-                        Pessoa = pessoa,
+                        IdPessoa = idPessoa,
                         Ativo = ativo,
                         DataCadastro = dataCadastro
                     };
@@ -326,14 +326,14 @@ namespace Mecanica.Models.Contexts
                     var colunas = item.ItemArray;
 
                     var id_cliente = colunas[0].ToString();
-                    var pessoa = int.Parse(colunas[1].ToString());
+                    var idPessoa = int.Parse(colunas[1].ToString());
                     var ativo = bool.Parse(colunas[2].ToString());
                     var dataCadastro = DateTime.Parse(colunas[3].ToString());
 
                     cliente = new Cliente
                     {
-                        Id = id,
-                        Pessoa = pessoa,
+                        Id = id_cliente,
+                        IdPessoa = idPessoa,
                         Ativo = ativo,
                         DataCadastro = dataCadastro
                     };
@@ -385,9 +385,28 @@ namespace Mecanica.Models.Contexts
 
                 command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoa.Id;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = pessoa.DataCadastro;
-                command.Parameters.Add("@pessoa", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
+                command.Parameters.Add("@cliente", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
                 command.Parameters.Add("@colaborador", SqlDbType.Bit).Value = pessoa.Colaborador ? 1 : 0;
                 command.Parameters.Add("@fornecedor", SqlDbType.Bit).Value = pessoa.Fornecedor ? 1 : 0;
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Excluir Pessoa
+        public void ExcluirPessoa(int id)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.EXCLUIR_PESSOA);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = id;
 
                 command.ExecuteNonQuery();
 
@@ -443,34 +462,45 @@ namespace Mecanica.Models.Contexts
         #region Pesquisar Pessoa Por Id
         public Pessoa PesquisarPessoaPorId(int id)
         {
+            Pessoa pessoa = new Pessoa();
+
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
+                var query = SqlManager.GetSql(TSql.PESQUISAR_PESSOA);
                 var command = new SqlCommand(query, _connection);
 
+                command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
 
+                var dataset = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataset);
 
-                command.ExecuteNonQuery();
+                var rows = dataset.Tables[0].Rows;
 
-            }
-            catch (Exception ex) { throw ex; }
-            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
-        }
-        #endregion
+                foreach (DataRow item in rows)
+                {
+                    var colunas = item.ItemArray;
 
-        #region Excluir Pessoa
-        public void ExcluirPessoa(int id)
-        {
-            try
-            {
-                _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
-                var command = new SqlCommand(query, _connection);
+                    var id_pessoa = int.Parse(colunas[0].ToString());
+                    var dataCadastro = DateTime.Parse(colunas[1].ToString());
+                    var cliente = bool.Parse(colunas[2].ToString());
+                    var colaborador = bool.Parse(colunas[3].ToString());
+                    var fornecedor = bool.Parse(colunas[4].ToString());
 
+                    pessoa = new Pessoa
+                    {
+                        Id = id_pessoa,
+                        DataCadastro = dataCadastro,
+                        Cliente = cliente,
+                        Colaborador = colaborador,
+                        Fornecedor = fornecedor
+                    };
+                }
 
+                adapter = null; dataset = null;
 
-                command.ExecuteNonQuery();
+                return pessoa;
 
             }
             catch (Exception ex) { throw ex; }
@@ -488,13 +518,16 @@ namespace Mecanica.Models.Contexts
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
+                var query = SqlManager.GetSql(TSql.ATUALIZAR_PESSOA_JURIDICA);
                 var command = new SqlCommand(query, _connection);
 
-
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaJuridica.Id;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
+                command.Parameters.Add("@nomeFantasia", SqlDbType.VarChar).Value = pessoaJuridica.NomeFantasia;
+                command.Parameters.Add("@razaoSocial", SqlDbType.VarChar).Value = pessoaJuridica.RazaoSocial;
+                command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = pessoaJuridica.Cnpj;
 
                 command.ExecuteNonQuery();
-
             }
             catch (Exception ex) { throw ex; }
             finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
@@ -507,48 +540,14 @@ namespace Mecanica.Models.Contexts
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
+                var query = SqlManager.GetSql(TSql.CADASTRAR_PESSOA_JURIDICA);
                 var command = new SqlCommand(query, _connection);
 
-
-
-                command.ExecuteNonQuery();
-
-            }
-            catch (Exception ex) { throw ex; }
-            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
-        }
-        #endregion
-
-        #region Listar Pessoa Juridica
-        public List<PessoaJuridica> ListarPessoaJuridica()
-        {
-            try
-            {
-                _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
-                var command = new SqlCommand(query, _connection);
-
-
-
-                command.ExecuteNonQuery();
-
-            }
-            catch (Exception ex) { throw ex; }
-            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
-        }
-        #endregion
-
-        #region Pesquisar Pessoa Juridica Por Id
-        public PessoaJuridica PesquisarPessoaJuridicaPorId(int id)
-        {
-            try
-            {
-                _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
-                var command = new SqlCommand(query, _connection);
-
-
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaJuridica.Id;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
+                command.Parameters.Add("@nomeFantasia", SqlDbType.VarChar).Value = pessoaJuridica.NomeFantasia;
+                command.Parameters.Add("@razaoSocial", SqlDbType.VarChar).Value = pessoaJuridica.RazaoSocial;
+                command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = pessoaJuridica.Cnpj;
 
                 command.ExecuteNonQuery();
 
@@ -564,12 +563,105 @@ namespace Mecanica.Models.Contexts
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
+                var query = SqlManager.GetSql(TSql.EXCLUIR_PESSOA_JURIDICA);
                 var command = new SqlCommand(query, _connection);
 
-
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = id;
 
                 command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Listar Pessoa Juridica
+        public List<PessoaJuridica> ListarPessoaJuridica()
+        {
+            var pessoasJuridicas = new List<PessoaJuridica>();
+            try
+            {
+                var query = SqlManager.GetSql(TSql.LISTAR_PESSOA_JURIDICA);
+                var command = new SqlCommand(query, _connection);
+                var dataset = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataset);
+
+                var rows = dataset.Tables[0].Rows;
+
+                foreach (DataRow item in rows)
+                {
+                    var colunas = item.ItemArray;
+
+                    var id = int.Parse(colunas[0].ToString());
+                    var idPessoa = int.Parse(colunas[1].ToString());
+                    var nomeFantasia = (colunas[2].ToString());
+                    var razaoSocial = (colunas[3].ToString());
+                    var cnpj = (colunas[4].ToString());
+
+
+                    var pessoaJuridica = new PessoaJuridica
+                    {
+                        Id = id,
+                        IdPessoa = idPessoa,
+                        NomeFantasia = nomeFantasia,
+                        RazaoSocial = razaoSocial,
+                        Cnpj = cnpj
+                    };
+                    pessoasJuridicas.Add(pessoaJuridica);
+                }
+
+                adapter = null; dataset = null;
+
+                return pessoasJuridicas;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        #endregion
+
+        #region Pesquisar Pessoa Juridica Por Id
+        public PessoaJuridica PesquisarPessoaJuridicaPorId(int id)
+        {
+            PessoaJuridica pessoaJuridica = new PessoaJuridica();
+
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.PESQUISAR_PESSOA_JURIDICA);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+
+                var dataset = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataset);
+
+                var rows = dataset.Tables[0].Rows;
+
+                foreach (DataRow item in rows)
+                {
+                    var colunas = item.ItemArray;
+
+                    var idPessoaJuridica = int.Parse(colunas[0].ToString());
+                    var idPessoa = int.Parse(colunas[1].ToString());
+                    var nomeFantasia = (colunas[2].ToString());
+                    var razaoSocial = (colunas[3].ToString());
+                    var cnpj = (colunas[4].ToString());
+
+                    pessoaJuridica = new PessoaJuridica
+                    {
+                        Id = idPessoaJuridica,
+                        IdPessoa = idPessoa,
+                        NomeFantasia = nomeFantasia,
+                        RazaoSocial = razaoSocial,
+                        Cnpj = cnpj
+                    };
+                }
+
+                adapter = null; dataset = null;
+
+                return pessoaJuridica;
 
             }
             catch (Exception ex) { throw ex; }
@@ -587,10 +679,13 @@ namespace Mecanica.Models.Contexts
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
+                var query = SqlManager.GetSql(TSql.ATUALIZAR_PESSOA_FISICA);
                 var command = new SqlCommand(query, _connection);
 
-
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaFisica.Id;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = pessoaFisica.Nome;
+                command.Parameters.Add("@cpf", SqlDbType.VarChar).Value = pessoaFisica.Cpf;
 
                 command.ExecuteNonQuery();
 
@@ -606,48 +701,13 @@ namespace Mecanica.Models.Contexts
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
+                var query = SqlManager.GetSql(TSql.CADASTRAR_PESSOA_FISICA);
                 var command = new SqlCommand(query, _connection);
 
-
-
-                command.ExecuteNonQuery();
-
-            }
-            catch (Exception ex) { throw ex; }
-            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
-        }
-        #endregion
-
-        #region Listar Pessoa Fisica
-        public List<PessoaFisica> ListarPessoaFisica()
-        {
-            try
-            {
-                _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
-                var command = new SqlCommand(query, _connection);
-
-
-
-                command.ExecuteNonQuery();
-
-            }
-            catch (Exception ex) { throw ex; }
-            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
-        }
-        #endregion
-
-        #region Pesquisar Pessoa Fisica Por Id
-        public PessoaFisica PesquisarPessoaFisicaPorId(int id)
-        {
-            try
-            {
-                _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
-                var command = new SqlCommand(query, _connection);
-
-
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaFisica.Id;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = pessoaFisica.Nome;
+                command.Parameters.Add("@cpf", SqlDbType.VarChar).Value = pessoaFisica.Cpf;
 
                 command.ExecuteNonQuery();
 
@@ -663,12 +723,101 @@ namespace Mecanica.Models.Contexts
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.);
+                var query = SqlManager.GetSql(TSql.EXCLUIR_PESSOA_FISICA);
                 var command = new SqlCommand(query, _connection);
 
-
+                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = id;
 
                 command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { throw ex; }
+            finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
+        }
+        #endregion
+
+        #region Listar Pessoa Fisica
+        public List<PessoaFisica> ListarPessoaFisica()
+        {
+            var pessoasFisicas = new List<PessoaFisica>();
+            try
+            {
+                var query = SqlManager.GetSql(TSql.LISTAR_PESSOA_FISICA);
+                var command = new SqlCommand(query, _connection);
+                var dataset = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataset);
+
+                var rows = dataset.Tables[0].Rows;
+
+                foreach (DataRow item in rows)
+                {
+                    var colunas = item.ItemArray;
+
+                    var id = int.Parse(colunas[0].ToString());
+                    var idPessoa = int.Parse(colunas[1].ToString());
+                    var nome = (colunas[2].ToString());
+                    var cpf = (colunas[3].ToString());
+
+
+                    var pessoaFisica = new PessoaFisica
+                    {
+                        Id = id,
+                        IdPessoa = idPessoa,
+                        Nome = nome,
+                        Cpf = cpf
+                    };
+                    pessoasFisicas.Add(pessoaFisica);
+                }
+
+                adapter = null; dataset = null;
+
+                return pessoasFisicas;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        #endregion
+
+        #region Pesquisar Pessoa Fisica Por Id
+        public PessoaFisica PesquisarPessoaFisicaPorId(int id)
+        {
+            PessoaFisica pessoaFisica = new PessoaFisica();
+
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.PESQUISAR_PESSOA_FISICA);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+
+                var dataset = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataset);
+
+                var rows = dataset.Tables[0].Rows;
+
+                foreach (DataRow item in rows)
+                {
+                    var colunas = item.ItemArray;
+
+                    var idPessoaFisica = int.Parse(colunas[0].ToString());
+                    var idPessoa = int.Parse(colunas[1].ToString());
+                    var nome = (colunas[2].ToString());
+                    var cpf = (colunas[3].ToString());
+
+                    pessoaFisica = new PessoaFisica
+                    {
+                        Id = idPessoaFisica,
+                        IdPessoa = idPessoa,
+                        Nome = nome,
+                        Cpf = cpf
+                    };
+                }
+
+                adapter = null; dataset = null;
+
+                return pessoaFisica;
 
             }
             catch (Exception ex) { throw ex; }

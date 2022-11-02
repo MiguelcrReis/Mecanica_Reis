@@ -6,7 +6,7 @@ namespace Mecanica.Models.Dtos
     {
         #region Parametros
         public int Id { get; set; }
-        public Pessoa Pessoa { get; set; }
+        public int IdPessoa { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         #endregion
@@ -21,7 +21,7 @@ namespace Mecanica.Models.Dtos
             return new PessoaFisica
             {
                 Id = this.Id,
-                Pessoa = this.Pessoa,
+                IdPessoa = this.IdPessoa,
                 Nome = this.Nome,
                 Cpf = this.Cpf
             };

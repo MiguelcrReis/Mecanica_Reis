@@ -40,7 +40,7 @@ namespace Mecanica
         public void AddDependenciesRepositories(IServiceCollection services)
         {
             services.AddScoped<IVeiculoRepository, VeiculoRepository>();
-            services.AddScoped<IClienteRepository, IClienteRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
         }
 
         public void AddDependenciesServices(IServiceCollection services)
