@@ -81,10 +81,115 @@ namespace Mecanica.Models.Repositories
                 case TSql.EXCLUIR_CLIENTE:
                     sql = "DELETE FROM Clientes WHERE CONVERT(varchar(36), id) = @id";
                     break;
+                #endregion
+                #endregion
+
+                #region Pessoa
+
+                #region CADASTRAR_PESSOA
+                case TSql.CADASTRAR_PESSOA:
+                    sql = "INSERT INTO [dbo].[Pessoa] ([dataCadastro], [cliente], [colaborador], [fornecedor])" +
+                        "VALUES ('@dataCadastro', @cliente, @colaborador, @fornecedor) " +
+                        "SELECT SCOPE_IDENTITY() GO";
+                    break;
+                #endregion
+
+                #region ATUALIZAR_PESSOA
+                case TSql.ATUALIZAR_PESSOA:
+
+                    break;
+                #endregion
+
+                #region LISTAR_PESSOA
+                case TSql.LISTAR_PESSOA:
+
+                    break;
+                #endregion
+
+                #region PESQUISAR_PESSOA
+                case TSql.PESQUISAR_PESSOA:
+
+                    break;
+                #endregion
+
+                #region EXCLUIR_PESSOA
+                case TSql.EXCLUIR_PESSOA:
+
+                    break;
+                #endregion
+
+                #endregion
+
+                #region Pessoa Juridica
+
+                #region CADASTRAR_PESSOA_JURIDICA 
+                case TSql.CADASTRAR_PESSOA_JURIDICA:
+                    sql = "INSERT INTO [dbo].[PessoaJuridica] ([idPessoa], [nomeFantasia], [razaoSocial], [cnpj])" +
+                        "VALUES (@idPessoa, @nomeFantasia, @razaoSocial, @cnpj)";
+                    //"SELECT SCOPE_IDENTITY() GO";
+                    break;
+                #endregion
+
+                #region ATUALIZAR_PESSOA_JURIDICA
+                case TSql.ATUALIZAR_PESSOA_JURIDICA:
+
+                    break;
+                #endregion
+
+                #region LISTAR_PESSOA_JURIDICA
+                case TSql.LISTAR_PESSOA_JURIDICA:
+
+                    break;
+                #endregion
+
+                #region PESQUISAR_PESSOA_JURIDICA
+                case TSql.PESQUISAR_PESSOA_JURIDICA:
+
+                    break;
+                #endregion
+
+                #region EXCLUIR_PESSOA_JURIDICA
+                case TSql.EXCLUIR_PESSOA_JURIDICA:
+
+                    break;
+                #endregion
+                #endregion
+
+                #region Pessoa Fisica
+
+                #region CADASTRAR_PESSOA_FISICA 
+                case TSql.CADASTRAR_PESSOA_FISICA:
+                    sql = "INSERT INTO [dbo].[PessoaFisica] ([idPessoa], [nome], [cpf])" +
+                        "VALUES (@idPessoa, @nome, @cpf)";
+                    //"SELECT SCOPE_IDENTITY() GO";
+                    break;
+                #endregion
+
+                #region ATUALIZAR_PESSOA_FISICA
+                case TSql.ATUALIZAR_PESSOA_FISICA:
+
+                    break;
+                #endregion
+
+                #region LISTAR_PESSOA_FISICA
+                case TSql.LISTAR_PESSOA_FISICA:
+
+                    break;
+                #endregion
+
+                #region PESQUISAR_PESSOA_FISICA
+                case TSql.PESQUISAR_PESSOA_FISICA:
+
+                    break;
+                #endregion
+
+                #region EXCLUIR_PESSOA_FISICA
+                case TSql.EXCLUIR_PESSOA_FISICA:
+
+                    break;
                     #endregion
                     #endregion
             }
-
             return sql;
         }
     }

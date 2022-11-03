@@ -5,5 +5,6 @@ namespace Mecanica.Models.Contracts.Services
 {
     public interface IPessoaService : IService<PessoaDto, int>
     {
+        new int Cadastrar(PessoaDto pessoa);
     }
 }

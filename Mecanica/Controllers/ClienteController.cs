@@ -5,16 +5,24 @@ using Mecanica.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System;
+using System.Collections.Generic;
 
 namespace Mecanica.Controllers
 {
     public class ClienteController : Controller
     {
         private readonly IClienteService _clienteService;
+        private readonly IPessoaService _pessoaService;
+        private readonly IPessoaJuridicaService _pessoaJuridicaService;
+        private readonly IPessoaFisicaService _pessoaFisicaService;
 
-        public ClienteController(IClienteService clienteService)
+        public ClienteController(IClienteService clienteService, IPessoaService pessoaService,
+            IPessoaJuridicaService pessoaJuridicaService, IPessoaFisicaService pessoaFisicaService)
         {
             _clienteService = clienteService;
+            _pessoaService = pessoaService;
+            _pessoaJuridicaService = pessoaJuridicaService;
+            _pessoaFisicaService = pessoaFisicaService;
         }
 
         public IActionResult Index()
@@ -26,8 +34,11 @@ namespace Mecanica.Controllers
         {
             try
             {
-                var veiculos = _clienteService.Listar();
-                return View(veiculos);
+                var clientes = _clienteService.Listar();
+                var pessoas = _pessoaService.Listar();
+                var clientePessoa = new List<object>(clientes);
+                clientePessoa.Add(pessoas);
+                return View(clientePessoa);
             }
             catch (Exception ex) { throw ex; }
         }

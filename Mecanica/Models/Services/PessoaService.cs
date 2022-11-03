@@ -1,6 +1,7 @@
 ﻿using Mecanica.Models.Contracts.Repositories;
 using Mecanica.Models.Contracts.Services;
 using Mecanica.Models.Dtos;
+using Mecanica.Models.Entidades;
 using Mecanica.Models.Repositories;
 using System;
 using System.Collections.Generic;
@@ -31,12 +32,13 @@ namespace Mecanica.Models.Services
         #endregion
 
         #region Cadastrar
-        public void Cadastrar(PessoaDto pessoa)
+        public int Cadastrar(PessoaDto pessoa)
         {
             try
             {
                 var objPessoa = pessoa.ConverteParaEntidade();
-                _pessoaRepository.Cadastrar(objPessoa);
+                var idPessoa = _pessoaRepository.Cadastrar(objPessoa);
+                return idPessoa;
             }
             catch (Exception ex) { throw ex; }
         }
@@ -81,5 +83,9 @@ namespace Mecanica.Models.Services
             catch (Exception ex) { throw ex; }
         }
         #endregion
+        void IService<PessoaDto, int>.Cadastrar(PessoaDto entidade)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

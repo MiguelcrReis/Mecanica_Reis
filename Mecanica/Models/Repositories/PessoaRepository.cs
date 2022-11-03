@@ -24,9 +24,10 @@ namespace Mecanica.Models.Repositories
         #endregion
 
         #region Cadastrar
-        public void Cadastrar(Pessoa pessoa)
+        public int Cadastrar(Pessoa pessoa)
         {
-            _contextData.CadastrarPessoa(pessoa);
+            int idPessoa = _contextData.CadastrarPessoa(pessoa);
+            return idPessoa;
         }
         #endregion
 
@@ -50,5 +51,10 @@ namespace Mecanica.Models.Repositories
             return _contextData.PesquisarPessoaPorId(id);
         }
         #endregion
+
+        void IRepository<Pessoa, int>.Cadastrar(Pessoa entidade)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

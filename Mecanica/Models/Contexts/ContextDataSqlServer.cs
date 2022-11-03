@@ -375,7 +375,7 @@ namespace Mecanica.Models.Contexts
         #endregion
 
         #region Cadastrar Pessoa
-        public void CadastrarPessoa(Pessoa pessoa)
+        public int CadastrarPessoa(Pessoa pessoa)
         {
             try
             {
@@ -383,14 +383,21 @@ namespace Mecanica.Models.Contexts
                 var query = SqlManager.GetSql(TSql.CADASTRAR_PESSOA);
                 var command = new SqlCommand(query, _connection);
 
-                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoa.Id;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = pessoa.DataCadastro;
                 command.Parameters.Add("@cliente", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
                 command.Parameters.Add("@colaborador", SqlDbType.Bit).Value = pessoa.Colaborador ? 1 : 0;
                 command.Parameters.Add("@fornecedor", SqlDbType.Bit).Value = pessoa.Fornecedor ? 1 : 0;
 
-                command.ExecuteNonQuery();
+                //command.ExecuteNonQuery();
 
+                SqlDataReader reader = command.ExecuteReader();
+                var dt = new DataTable();
+                dt.Load(reader);
+                reader.Close();
+
+                int idPessoa = int.Parse(dt.Rows[0][0].ToString());
+
+                return idPessoa;
             }
             catch (Exception ex) { throw ex; }
             finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }

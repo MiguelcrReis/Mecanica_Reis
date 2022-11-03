@@ -198,6 +198,11 @@ namespace Mecanica.Models.Contexts
         {
             throw new NotImplementedException();
         }
+
+        int IContextData.CadastrarPessoa(Pessoa pessoa)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

@@ -41,12 +41,18 @@ namespace Mecanica
         {
             services.AddScoped<IVeiculoRepository, VeiculoRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IPessoaRepository, PessoaRepository>();
+            services.AddScoped<IPessoaJuridicaRepository, PessoaJuridicaRepository>();
+            services.AddScoped<IPessoaFisicaRepository, PessoaFisicaRepository>();
         }
 
         public void AddDependenciesServices(IServiceCollection services)
         {
             services.AddScoped<IVeiculoService, VeiculoService>();
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IPessoaService, PessoaService>();
+            services.AddScoped<IPessoaJuridicaService, PessoaJuridicaService>();
+            services.AddScoped<IPessoaFisicaService, PessoaFisicaService>();
         }
 
         public void ConfigureDatasource(IServiceCollection services)

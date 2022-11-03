@@ -25,7 +25,7 @@ namespace Mecanica.Models.Contracts.Contexts
         #endregion
 
         #region Pessoa
-        void CadastrarPessoa(Pessoa pessoa);
+        int CadastrarPessoa(Pessoa pessoa);
         List<Pessoa> ListarPessoa();
         Pessoa PesquisarPessoaPorId(int id);
         void AtualizarPessoa(Pessoa pessoa);
