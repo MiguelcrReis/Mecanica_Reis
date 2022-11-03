@@ -25,7 +25,7 @@ namespace Mecanica.Models.Dtos
             return new Cliente
             {
                 Id = this.Id,
-                Pessoa = this.Pessoa.ConverteParaEntidade(),
+                Pessoa = this.Pessoa,
                 //IdPessoa = this.IdPessoa,
                 Ativo = this.Ativo,
                 DataCadastro = this.DataCadastro
