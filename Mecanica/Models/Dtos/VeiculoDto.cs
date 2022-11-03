@@ -21,11 +21,10 @@ namespace Mecanica.Models.DTOS
         #endregion
 
         #region Construtores da Classe
-        public VeiculoDto()
-        {
+        public VeiculoDto() { }
+        #endregion
 
-        }
-
+        #region Metodos    
         public Veiculo ConverterParaEntidade()
         {
             return new Veiculo
@@ -40,7 +39,6 @@ namespace Mecanica.Models.DTOS
                 Cor = this.Cor
             };
         }
-
         #endregion
     }
 }

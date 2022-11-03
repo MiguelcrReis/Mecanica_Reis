@@ -21,7 +21,9 @@ namespace Mecanica.Models.Entidades
         {
 
         }
+        #endregion
 
+        #region Metodos
         public VeiculoDto ConverterParaDto()
         {
             return new VeiculoDto

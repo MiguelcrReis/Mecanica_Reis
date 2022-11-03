@@ -6,13 +6,21 @@ namespace Mecanica.Models.Entidades
     {
         #region Parametros
         public int Id { get; set; }
-        public int IdPessoa { get; set; }
+        public Pessoa Pessoa { get; set; }
+        //public int IdPessoa { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         #endregion
 
         #region Construtores
         public PessoaFisica() { }
+        public PessoaFisica(int id, int idPessoa, string nome, string cpf)
+        {
+            Id = id;
+            Pessoa.Id = idPessoa;
+            Nome = nome;
+            Cpf = cpf;
+        }
         #endregion
 
         #region Metodos
@@ -21,7 +29,7 @@ namespace Mecanica.Models.Entidades
             return new PessoaFisicaDto
             {
                 Id = this.Id,
-                IdPessoa = this.IdPessoa,
+                Pessoa = this.Pessoa,
                 Nome = this.Nome,
                 Cpf = this.Cpf
             };

@@ -1,4 +1,5 @@
 ﻿using Mecanica.Models.Dtos;
+using Mecanica.Models.Enums;
 using System;
 using System.Data;
 
@@ -8,6 +9,7 @@ namespace Mecanica.Models.Entidades
     {
         #region Parametros
         public int Id { get; set; }
+        public TipoPessoa TipoPessoa { get; set; }
         public DateTime DataCadastro { get; set; }
         public bool Cliente { get; set; }
         public bool Colaborador { get; set; }
@@ -16,6 +18,10 @@ namespace Mecanica.Models.Entidades
 
         #region Construtores
         public Pessoa() { }
+        public Pessoa(int id)
+        {
+            Id = id;
+        }
         #endregion
 
         #region Metodos
@@ -24,6 +30,7 @@ namespace Mecanica.Models.Entidades
             return new PessoaDto
             {
                 Id = this.Id,
+                TipoPessoa = this.TipoPessoa,
                 DataCadastro = this.DataCadastro,
                 Cliente = this.Cliente,
                 Colaborador = this.Colaborador,

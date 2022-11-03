@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Mecanica.Models.Dtos.ClienteDto>
+﻿@using Mecanica.Models.Enums
+@model IEnumerable<Mecanica.Models.Dtos.ClienteDto>
 
 @{
     ViewData["Title"] = "List";
@@ -13,41 +14,66 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdPessoa)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pessoa.Id)
+            </th>
+            @if (Html.DisplayNameFor(model => model.Pessoa.TipoPessoa) == TipoPessoa.Juridica.ToString())
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.PessoaJuridica.NomeFantasia)
+                </th>
+            }
+            else
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.PessoaFisica.Nome)
+                </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.Ativo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataCadastro)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPessoa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pessoa.Id)
+                </td>
+                @if (Html.DisplayFor(modelItem => item.Pessoa.TipoPessoa.ToString()).Equals(TipoPessoa.Juridica.ToString()))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PessoaJuridica.NomeFantasia)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PessoaFisica.Nome)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCadastro)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

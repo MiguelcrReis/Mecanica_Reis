@@ -208,8 +208,8 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
-                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
+                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
                 command.Parameters.Add("@ativo", SqlDbType.Bit).Value = cliente.Ativo ? 1 : 0;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = cliente.DataCadastro;
 
@@ -231,8 +231,8 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
-                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
+                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
                 command.Parameters.Add("@ativo", SqlDbType.Bit).Value = cliente.Ativo ? 1 : 0;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = cliente.DataCadastro;
 
@@ -289,7 +289,7 @@ namespace Mecanica.Models.Contexts
                     var cliente = new Cliente
                     {
                         Id = id,
-                        IdPessoa = idPessoa,
+                        Pessoa = new Pessoa(idPessoa),
                         Ativo = ativo,
                         DataCadastro = dataCadastro
                     };
@@ -333,7 +333,7 @@ namespace Mecanica.Models.Contexts
                     cliente = new Cliente
                     {
                         Id = id_cliente,
-                        IdPessoa = idPessoa,
+                        Pessoa = new Pessoa(idPessoa),
                         Ativo = ativo,
                         DataCadastro = dataCadastro
                     };
@@ -362,6 +362,7 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoa.Id;
+                command.Parameters.Add("@tipoPessoa", SqlDbType.SmallInt).Value = int.Parse(pessoa.TipoPessoa.ToString());
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = pessoa.DataCadastro;
                 command.Parameters.Add("@pessoa", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
                 command.Parameters.Add("@colaborador", SqlDbType.Bit).Value = pessoa.Colaborador ? 1 : 0;
@@ -383,6 +384,7 @@ namespace Mecanica.Models.Contexts
                 var query = SqlManager.GetSql(TSql.CADASTRAR_PESSOA);
                 var command = new SqlCommand(query, _connection);
 
+                command.Parameters.Add("@tipoPessoa", SqlDbType.SmallInt).Value = int.Parse(pessoa.TipoPessoa.ToString());
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = pessoa.DataCadastro;
                 command.Parameters.Add("@cliente", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
                 command.Parameters.Add("@colaborador", SqlDbType.Bit).Value = pessoa.Colaborador ? 1 : 0;
@@ -529,7 +531,8 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaJuridica.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.Pessoa.Id;
+                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
                 command.Parameters.Add("@nomeFantasia", SqlDbType.VarChar).Value = pessoaJuridica.NomeFantasia;
                 command.Parameters.Add("@razaoSocial", SqlDbType.VarChar).Value = pessoaJuridica.RazaoSocial;
                 command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = pessoaJuridica.Cnpj;
@@ -551,7 +554,8 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaJuridica.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.Pessoa.Id;
+                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
                 command.Parameters.Add("@nomeFantasia", SqlDbType.VarChar).Value = pessoaJuridica.NomeFantasia;
                 command.Parameters.Add("@razaoSocial", SqlDbType.VarChar).Value = pessoaJuridica.RazaoSocial;
                 command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = pessoaJuridica.Cnpj;
@@ -611,7 +615,7 @@ namespace Mecanica.Models.Contexts
                     var pessoaJuridica = new PessoaJuridica
                     {
                         Id = id,
-                        IdPessoa = idPessoa,
+                        Pessoa = new Pessoa(idPessoa),
                         NomeFantasia = nomeFantasia,
                         RazaoSocial = razaoSocial,
                         Cnpj = cnpj
@@ -659,7 +663,7 @@ namespace Mecanica.Models.Contexts
                     pessoaJuridica = new PessoaJuridica
                     {
                         Id = idPessoaJuridica,
-                        IdPessoa = idPessoa,
+                        Pessoa = new Pessoa(idPessoa),
                         NomeFantasia = nomeFantasia,
                         RazaoSocial = razaoSocial,
                         Cnpj = cnpj
@@ -690,7 +694,8 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaFisica.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.Pessoa.Id;
+                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
                 command.Parameters.Add("@nome", SqlDbType.VarChar).Value = pessoaFisica.Nome;
                 command.Parameters.Add("@cpf", SqlDbType.VarChar).Value = pessoaFisica.Cpf;
 
@@ -712,7 +717,8 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaFisica.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.Pessoa.Id;
+                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
                 command.Parameters.Add("@nome", SqlDbType.VarChar).Value = pessoaFisica.Nome;
                 command.Parameters.Add("@cpf", SqlDbType.VarChar).Value = pessoaFisica.Cpf;
 
@@ -767,10 +773,10 @@ namespace Mecanica.Models.Contexts
                     var cpf = (colunas[3].ToString());
 
 
-                    var pessoaFisica = new PessoaFisica
+                    var pessoaFisica = new PessoaFisica(id, idPessoa, nome, cpf)
                     {
                         Id = id,
-                        IdPessoa = idPessoa,
+                        Pessoa = new Pessoa(idPessoa),
                         Nome = nome,
                         Cpf = cpf
                     };
@@ -816,7 +822,7 @@ namespace Mecanica.Models.Contexts
                     pessoaFisica = new PessoaFisica
                     {
                         Id = idPessoaFisica,
-                        IdPessoa = idPessoa,
+                        Pessoa = new Pessoa(idPessoa),
                         Nome = nome,
                         Cpf = cpf
                     };

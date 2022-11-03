@@ -6,7 +6,8 @@ namespace Mecanica.Models.Entidades
     {
         #region Parametros
         public int Id { get; set; }
-        public int IdPessoa { get; set; }
+        public Pessoa Pessoa { get; set; }
+        //public int IdPessoa { get; set; }
         public string NomeFantasia { get; set; }
         public string RazaoSocial { get; set; }
         public string Cnpj { get; set; }
@@ -22,7 +23,7 @@ namespace Mecanica.Models.Entidades
             return new PessoaJuridicaDto
             {
                 Id = this.Id,
-                IdPessoa = this.IdPessoa,
+                Pessoa = this.Pessoa,
                 NomeFantasia = this.NomeFantasia,
                 RazaoSocial = this.RazaoSocial,
                 Cnpj = this.Cnpj

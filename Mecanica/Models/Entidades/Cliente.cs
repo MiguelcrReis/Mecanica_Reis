@@ -6,8 +6,8 @@ namespace Mecanica.Models.Entidades
     public class Cliente : EntidadeBase
     {
         #region Parametros da Classe
-        //public Pessoa Pessoa { get; set; }
-        public int IdPessoa { get; set; }
+        public Pessoa Pessoa { get; set; }
+        //public int IdPessoa { get; set; }
         public bool Ativo { get; set; }
         public DateTime DataCadastro { get; set; }
         #endregion
@@ -15,7 +15,7 @@ namespace Mecanica.Models.Entidades
         #region Construtores da Classe
         public Cliente() { }
 
-        //#region Cliente Pessoa Fisica
+        #region Cliente Pessoa Fisica
         //// Cliente Pessoa Fisica
         //public Cliente(string id, string nome, string cpf, string email, string endereco, string telefone)
         //    : this(nome, cpf, email, endereco, telefone)
@@ -50,7 +50,8 @@ namespace Mecanica.Models.Entidades
         //    Endereco = endereco;
         //    Telefone = telefone;
         //}
-        //#endregion
+        #endregion
+
         #endregion
 
         #region Metodos 
@@ -59,7 +60,8 @@ namespace Mecanica.Models.Entidades
             return new ClienteDto
             {
                 Id = this.Id,
-                IdPessoa = this.IdPessoa,
+                Pessoa = this.Pessoa,
+                //IdPessoa = this.IdPessoa,
                 Ativo = this.Ativo,
                 DataCadastro = this.DataCadastro
             };
