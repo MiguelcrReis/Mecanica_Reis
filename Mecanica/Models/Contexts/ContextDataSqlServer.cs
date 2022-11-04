@@ -1,5 +1,6 @@
 ﻿using Mecanica.Models.Contracts.Contexts;
 using Mecanica.Models.Contracts.Repositories;
+using Mecanica.Models.Dtos;
 using Mecanica.Models.Entidades;
 using Mecanica.Models.Enums;
 using Mecanica.Models.Repositories;
@@ -62,8 +63,8 @@ namespace Mecanica.Models.Contexts
                 command.Parameters.Add("@placa", SqlDbType.VarChar).Value = veiculo.Placa;
                 command.Parameters.Add("@fabricante", SqlDbType.VarChar).Value = veiculo.Fabricante;
                 command.Parameters.Add("@modelo", SqlDbType.VarChar).Value = veiculo.Modelo;
-                command.Parameters.Add("@anoFabricacao", SqlDbType.Date).Value = veiculo.AnoFabricacao;
-                command.Parameters.Add("@anoModelo", SqlDbType.Date).Value = veiculo.AnoModelo;
+                command.Parameters.Add("@anoFabricacao", SqlDbType.Int).Value = veiculo.AnoFabricacao;
+                command.Parameters.Add("@anoModelo", SqlDbType.Int).Value = veiculo.AnoModelo;
                 command.Parameters.Add("@combustivel", SqlDbType.VarChar).Value = veiculo.Combustivel;
                 command.Parameters.Add("@cor", SqlDbType.VarChar).Value = veiculo.Cor;
 
@@ -289,7 +290,7 @@ namespace Mecanica.Models.Contexts
                     var cliente = new Cliente
                     {
                         Id = id,
-                        Pessoa = new Pessoa(idPessoa),
+                        Pessoa = new PessoaDto(idPessoa),
                         Ativo = ativo,
                         DataCadastro = dataCadastro
                     };
@@ -444,14 +445,16 @@ namespace Mecanica.Models.Contexts
                     var colunas = item.ItemArray;
 
                     var id = int.Parse(colunas[0].ToString());
-                    var dataCadastro = DateTime.Parse(colunas[1].ToString());
-                    var cliente = bool.Parse(colunas[2].ToString());
-                    var colaborador = bool.Parse(colunas[3].ToString());
-                    var fornecedor = bool.Parse(colunas[4].ToString());
+                    var tipoPessoa = (TipoPessoa)int.Parse(colunas[1].ToString());
+                    var dataCadastro = DateTime.Parse(colunas[2].ToString());
+                    var cliente = bool.Parse(colunas[3].ToString());
+                    var colaborador = bool.Parse(colunas[4].ToString());
+                    var fornecedor = bool.Parse(colunas[5].ToString());
 
                     var pessoa = new Pessoa
                     {
                         Id = id,
+                        TipoPessoa = tipoPessoa,
                         DataCadastro = dataCadastro,
                         Cliente = cliente,
                         Colaborador = colaborador,
@@ -773,7 +776,7 @@ namespace Mecanica.Models.Contexts
                     var cpf = (colunas[3].ToString());
 
 
-                    var pessoaFisica = new PessoaFisica(id, idPessoa, nome, cpf)
+                    var pessoaFisica = new PessoaFisica
                     {
                         Id = id,
                         Pessoa = new Pessoa(idPessoa),

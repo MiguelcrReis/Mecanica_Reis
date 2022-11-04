@@ -44,7 +44,7 @@ namespace Mecanica.Controllers
 
                 foreach (var cliente in clientes)
                 {
-                    cliente.Pessoa = (Pessoa)pessoas.Where(c => c.Id == cliente.Pessoa.Id);
+                    //cliente.Pessoa = new Pessoa(pessoas.Where(c => c.Id == cliente.Pessoa.Id));
                     if (cliente.Pessoa.TipoPessoa.Equals(TipoPessoa.Juridica))
                     {
                         cliente.PessoaJuridica = (PessoaJuridicaDto)pessoasJuridicas.Where(c => c.Pessoa.Id == cliente.Pessoa.Id);

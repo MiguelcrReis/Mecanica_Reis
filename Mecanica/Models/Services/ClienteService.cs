@@ -64,7 +64,7 @@ namespace Mecanica.Models.Services
                 var clientesDto = new List<ClienteDto>();
                 var clientes = _clienteRepository.Listar();
                 foreach (var item in clientes)
-                {
+                {   
                     clientesDto.Add(item.ConverteParaDto());
                 }
                 return clientesDto;

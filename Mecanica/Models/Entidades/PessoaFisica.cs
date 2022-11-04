@@ -14,13 +14,13 @@ namespace Mecanica.Models.Entidades
 
         #region Construtores
         public PessoaFisica() { }
-        public PessoaFisica(int id, int idPessoa, string nome, string cpf)
-        {
-            Id = id;
-            Pessoa.Id = idPessoa;
-            Nome = nome;
-            Cpf = cpf;
-        }
+        //public PessoaFisica(int id, int idPessoa, string nome, string cpf)
+        //{
+        //    Id = id;
+        //    Pessoa.Id = idPessoa;
+        //    Nome = nome;
+        //    Cpf = cpf;
+        //}
         #endregion
 
         #region Metodos
