@@ -6,8 +6,8 @@ namespace Mecanica.Models.Entidades
     public class Cliente : EntidadeBase
     {
         #region Parametros da Classe
+        public int IdPessoa { get; set; }
         public Pessoa Pessoa { get; set; }
-        //public int IdPessoa { get; set; }
         public bool Ativo { get; set; }
         public DateTime DataCadastro { get; set; }
         #endregion
@@ -60,8 +60,8 @@ namespace Mecanica.Models.Entidades
             return new ClienteDto
             {
                 Id = this.Id,
-                Pessoa = this.Pessoa,
-                //IdPessoa = this.IdPessoa,
+                //Pessoa = this.Pessoa,
+                IdPessoa = this.IdPessoa,
                 Ativo = this.Ativo,
                 DataCadastro = this.DataCadastro
             };

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace Mecanica.Controllers
 {
@@ -38,20 +39,40 @@ namespace Mecanica.Controllers
             try
             {
                 var clientes = _clienteService.Listar();
+                
                 var pessoas = _pessoaService.Listar();
                 var pessoasJuridicas = _pessoaJuridicaService.Listar();
                 var pessoasFisicas = _pessoaFisicaService.Listar();
 
                 foreach (var cliente in clientes)
                 {
-                    //cliente.Pessoa = new Pessoa(pessoas.Where(c => c.Id == cliente.Pessoa.Id));
-                    if (cliente.Pessoa.TipoPessoa.Equals(TipoPessoa.Juridica))
+                    foreach (var pessoa in pessoas)
                     {
-                        cliente.PessoaJuridica = (PessoaJuridicaDto)pessoasJuridicas.Where(c => c.Pessoa.Id == cliente.Pessoa.Id);
-                    }
-                    else
-                    {
-                        cliente.PessoaFisica = (PessoaFisicaDto)pessoasFisicas.Where(c => c.Pessoa.Id == cliente.Pessoa.Id);
+                        if (cliente.IdPessoa.Equals(pessoa.Id))
+                        {
+                            cliente.Pessoa = pessoa;
+
+                            if (cliente.Pessoa.TipoPessoa.Equals(TipoPessoa.Juridica))
+                            {
+                                foreach (var pj in pessoasJuridicas)
+                                {
+                                    if (cliente.IdPessoa.Equals(pj.IdPessoa))
+                                    {
+                                        cliente.PessoaJuridica = pj;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var pf in pessoasFisicas)
+                                {
+                                    if (cliente.IdPessoa.Equals(pf.IdPessoa))
+                                    {
+                                        cliente.PessoaFisica = pf;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 

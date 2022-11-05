@@ -50,7 +50,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Pessoa.Id)
                 </td>
-                @if (Html.DisplayFor(modelItem => item.Pessoa.TipoPessoa.ToString()).Equals(TipoPessoa.Juridica.ToString()))
+                @if (item.Pessoa.TipoPessoa.Equals(TipoPessoa.Juridica))
                 {
                     <td>
                         @Html.DisplayFor(modelItem => item.PessoaJuridica.NomeFantasia)

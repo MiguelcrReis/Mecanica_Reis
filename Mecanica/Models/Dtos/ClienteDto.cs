@@ -7,10 +7,10 @@ namespace Mecanica.Models.Dtos
     public class ClienteDto : EntidadeBase
     {
         #region Parametros da Classe
-        public Pessoa Pessoa { get; set; }
+        public int IdPessoa { get; set; }
+        public PessoaDto Pessoa { get; set; }
         public PessoaJuridicaDto PessoaJuridica { get; set; }
         public PessoaFisicaDto PessoaFisica { get; set; }
-        //public int IdPessoa { get; set; }
         public bool Ativo { get; set; }
         public DateTime DataCadastro { get; set; }
         #endregion
@@ -25,8 +25,8 @@ namespace Mecanica.Models.Dtos
             return new Cliente
             {
                 Id = this.Id,
-                Pessoa = this.Pessoa,
-                //IdPessoa = this.IdPessoa,
+                //Pessoa = this.Pessoa,
+                IdPessoa = this.IdPessoa,
                 Ativo = this.Ativo,
                 DataCadastro = this.DataCadastro
             };

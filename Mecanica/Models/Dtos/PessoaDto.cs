@@ -17,6 +17,14 @@ namespace Mecanica.Models.Dtos
 
         #region Construtores
         public PessoaDto() { }
+        public PessoaDto(PessoaDto pessoaDto)
+        {
+            Id = pessoaDto.Id;
+            TipoPessoa = pessoaDto.TipoPessoa;
+            Cliente = pessoaDto.Cliente;
+            Colaborador = pessoaDto.Colaborador;
+            Fornecedor = pessoaDto.Fornecedor;
+        }
         #endregion
 
         #region Metodos

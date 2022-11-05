@@ -290,7 +290,7 @@ namespace Mecanica.Models.Contexts
                     var cliente = new Cliente
                     {
                         Id = id,
-                        Pessoa = new PessoaDto(idPessoa),
+                        IdPessoa = idPessoa,
                         Ativo = ativo,
                         DataCadastro = dataCadastro
                     };
@@ -334,7 +334,7 @@ namespace Mecanica.Models.Contexts
                     cliente = new Cliente
                     {
                         Id = id_cliente,
-                        Pessoa = new Pessoa(idPessoa),
+                        IdPessoa = idPessoa,
                         Ativo = ativo,
                         DataCadastro = dataCadastro
                     };
@@ -618,7 +618,7 @@ namespace Mecanica.Models.Contexts
                     var pessoaJuridica = new PessoaJuridica
                     {
                         Id = id,
-                        Pessoa = new Pessoa(idPessoa),
+                        IdPessoa = idPessoa,
                         NomeFantasia = nomeFantasia,
                         RazaoSocial = razaoSocial,
                         Cnpj = cnpj
@@ -666,7 +666,7 @@ namespace Mecanica.Models.Contexts
                     pessoaJuridica = new PessoaJuridica
                     {
                         Id = idPessoaJuridica,
-                        Pessoa = new Pessoa(idPessoa),
+                        IdPessoa = idPessoa,
                         NomeFantasia = nomeFantasia,
                         RazaoSocial = razaoSocial,
                         Cnpj = cnpj
@@ -779,7 +779,7 @@ namespace Mecanica.Models.Contexts
                     var pessoaFisica = new PessoaFisica
                     {
                         Id = id,
-                        Pessoa = new Pessoa(idPessoa),
+                        IdPessoa = idPessoa,
                         Nome = nome,
                         Cpf = cpf
                     };
@@ -825,7 +825,7 @@ namespace Mecanica.Models.Contexts
                     pessoaFisica = new PessoaFisica
                     {
                         Id = idPessoaFisica,
-                        Pessoa = new Pessoa(idPessoa),
+                        IdPessoa = idPessoa,
                         Nome = nome,
                         Cpf = cpf
                     };
