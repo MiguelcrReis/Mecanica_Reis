@@ -15,6 +15,7 @@ namespace Mecanica.Controllers
 {
     public class ClienteController : Controller
     {
+        #region Instancias
         private readonly IClienteService _clienteService;
         private readonly IPessoaService _pessoaService;
         private readonly IPessoaJuridicaService _pessoaJuridicaService;
@@ -28,12 +29,16 @@ namespace Mecanica.Controllers
             _pessoaJuridicaService = pessoaJuridicaService;
             _pessoaFisicaService = pessoaFisicaService;
         }
+        #endregion
 
+        #region Index
         public IActionResult Index()
         {
             return View();
         }
+        #endregion
 
+        #region List
         public IActionResult List()
         {
             try
@@ -80,6 +85,7 @@ namespace Mecanica.Controllers
             }
             catch (Exception ex) { throw ex; }
         }
+        #endregion
 
         public IActionResult Create()
         {

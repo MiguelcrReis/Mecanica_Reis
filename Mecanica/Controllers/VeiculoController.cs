@@ -10,18 +10,23 @@ namespace Mecanica.Controllers
 {
     public class VeiculoController : Controller
     {
+        #region Instancias
         private readonly IVeiculoService _veiculoService;
 
         public VeiculoController(IVeiculoService veiculoService)
         {
             _veiculoService = veiculoService;
         }
+        #endregion
 
+        #region Index
         public IActionResult Index()
         {
             return View();
         }
+        #endregion
 
+        #region List
         public IActionResult List()
         {
             try
@@ -31,11 +36,14 @@ namespace Mecanica.Controllers
             }
             catch (Exception ex) { throw ex; }
         }
+        #endregion
 
+        #region Create
         public IActionResult Create()
         {
             return View();
         }
+        #endregion
 
         //Todas as Actions por padrão são get, para enviar dados via post precisa usar o HttpPost
 
