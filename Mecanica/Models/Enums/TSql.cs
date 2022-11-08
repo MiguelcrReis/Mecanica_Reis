@@ -37,6 +37,7 @@ namespace Mecanica.Models.Enums
         PESQUISAR_PESSOA_JURIDICA,
         ATUALIZAR_PESSOA_JURIDICA,
         EXCLUIR_PESSOA_JURIDICA,
+        PESQUISAR_PESSOA_JURIDICA_IDPESSOA,
         #endregion
 
         #region Pessoa Fisica
@@ -45,7 +46,8 @@ namespace Mecanica.Models.Enums
         LISTAR_PESSOA_FISICA,
         PESQUISAR_PESSOA_FISICA,
         ATUALIZAR_PESSOA_FISICA,
-        EXCLUIR_PESSOA_FISICA
+        EXCLUIR_PESSOA_FISICA,
+        PESQUISAR_PESSOA_FISICA_IDPESSOA
         #endregion
     }
 }

@@ -44,42 +44,44 @@ namespace Mecanica.Controllers
             try
             {
                 var clientes = _clienteService.Listar();
-                
-                var pessoas = _pessoaService.Listar();
-                var pessoasJuridicas = _pessoaJuridicaService.Listar();
-                var pessoasFisicas = _pessoaFisicaService.Listar();
 
-                foreach (var cliente in clientes)
-                {
-                    foreach (var pessoa in pessoas)
-                    {
-                        if (cliente.IdPessoa.Equals(pessoa.Id))
-                        {
-                            cliente.Pessoa = pessoa;
+                #region Modo alternativo
+                //var pessoas = _pessoaService.Listar();
+                //var pessoasJuridicas = _pessoaJuridicaService.Listar();
+                //var pessoasFisicas = _pessoaFisicaService.Listar();
 
-                            if (cliente.Pessoa.TipoPessoa.Equals(TipoPessoa.Juridica))
-                            {
-                                foreach (var pj in pessoasJuridicas)
-                                {
-                                    if (cliente.IdPessoa.Equals(pj.IdPessoa))
-                                    {
-                                        cliente.PessoaJuridica = pj;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                foreach (var pf in pessoasFisicas)
-                                {
-                                    if (cliente.IdPessoa.Equals(pf.IdPessoa))
-                                    {
-                                        cliente.PessoaFisica = pf;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                //foreach (var cliente in clientes)
+                //{
+                //    foreach (var pessoa in pessoas)
+                //    {
+                //        if (cliente.IdPessoa.Equals(pessoa.Id))
+                //        {
+                //            cliente.Pessoa = pessoa;
+
+                //            if (cliente.Pessoa.TipoPessoa.Equals(TipoPessoa.Juridica))
+                //            {
+                //                foreach (var pj in pessoasJuridicas)
+                //                {
+                //                    if (cliente.IdPessoa.Equals(pj.IdPessoa))
+                //                    {
+                //                        cliente.PessoaJuridica = pj;
+                //                    }
+                //                }
+                //            }
+                //            else
+                //            {
+                //                foreach (var pf in pessoasFisicas)
+                //                {
+                //                    if (cliente.IdPessoa.Equals(pf.IdPessoa))
+                //                    {
+                //                        cliente.PessoaFisica = pf;
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+                #endregion
 
                 return View(clientes);
             }

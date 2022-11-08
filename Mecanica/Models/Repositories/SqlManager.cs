@@ -148,7 +148,13 @@ namespace Mecanica.Models.Repositories
 
                 #region PESQUISAR_PESSOA_JURIDICA
                 case TSql.PESQUISAR_PESSOA_JURIDICA:
-                    sql = "SELECT * FROM [dbo].[PessoaJuridicas] WHERE id = @id";
+                    sql = "SELECT * FROM [dbo].[PessoaJuridica] WHERE id = @id";
+                    break;
+                #endregion
+
+                #region PESQUISAR_PESSOA_JURIDICA_IDPESSOA
+                case TSql.PESQUISAR_PESSOA_JURIDICA_IDPESSOA:
+                    sql = "SELECT * FROM [dbo].[PessoaJuridica] WHERE idPessoa = @id";
                     break;
                 #endregion
 
@@ -182,7 +188,13 @@ namespace Mecanica.Models.Repositories
 
                 #region PESQUISAR_PESSOA_FISICA
                 case TSql.PESQUISAR_PESSOA_FISICA:
-                    sql = "SELECT * FROM [dbo].[PessoaFisicas] WHERE id = @id";
+                    sql = "SELECT * FROM [dbo].[PessoaFisica] WHERE id = @id";
+                    break;
+                #endregion
+
+                #region PESQUISAR_PESSOA_FISICA_IDPESSOA
+                case TSql.PESQUISAR_PESSOA_FISICA_IDPESSOA:
+                    sql = "SELECT * FROM [dbo].[PessoaFisica] WHERE idPessoa = @id";
                     break;
                 #endregion
 

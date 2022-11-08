@@ -1,4 +1,5 @@
 ﻿using Mecanica.Models.Entidades;
+using Mecanica.Models.Enums;
 using Microsoft.Extensions.WebEncoders.Testing;
 using System;
 
@@ -22,14 +23,32 @@ namespace Mecanica.Models.Dtos
         #region Metodos
         public Cliente ConverteParaEntidade()
         {
-            return new Cliente
+            if ((int)Pessoa.TipoPessoa == 2)
             {
-                Id = this.Id,
-                //Pessoa = this.Pessoa,
-                IdPessoa = this.IdPessoa,
-                Ativo = this.Ativo,
-                DataCadastro = this.DataCadastro
-            };
+                return new Cliente
+                {
+                    Id = this.Id,
+                    IdPessoa = this.IdPessoa,
+                    Pessoa = this.Pessoa.ConverteParaEntidade(),
+                    PessoaJuridica = this.PessoaJuridica.ConverteParaEntidade(),
+                    //PessoaFisica = this.PessoaFisica.ConverteParaEntidade(),
+                    Ativo = this.Ativo,
+                    DataCadastro = this.DataCadastro
+                };
+            }
+            else
+            {
+                return new Cliente
+                {
+                    Id = this.Id,
+                    IdPessoa = this.IdPessoa,
+                    Pessoa = this.Pessoa.ConverteParaEntidade(),
+                    //PessoaJuridica = this.PessoaJuridica.ConverteParaEntidade(),
+                    PessoaFisica = this.PessoaFisica.ConverteParaEntidade(),
+                    Ativo = this.Ativo,
+                    DataCadastro = this.DataCadastro
+                };
+            }
         }
         #endregion
     }
