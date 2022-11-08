@@ -96,7 +96,7 @@ namespace Mecanica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateJuridica([Bind("IdPessoa, Pessoa, PessoaJuridica, Ativo, DataCadastro")] ClienteDto cliente)
+        public IActionResult Create([Bind("IdPessoa, Pessoa, PessoaJuridica, PessoaFisica, Ativo, DataCadastro")] ClienteDto cliente)
         {
             try
             {
