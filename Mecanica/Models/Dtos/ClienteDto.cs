@@ -31,7 +31,6 @@ namespace Mecanica.Models.Dtos
                     IdPessoa = this.IdPessoa,
                     Pessoa = this.Pessoa.ConverteParaEntidade(),
                     PessoaJuridica = this.PessoaJuridica.ConverteParaEntidade(),
-                    //PessoaFisica = this.PessoaFisica.ConverteParaEntidade(),
                     Ativo = this.Ativo,
                     DataCadastro = this.DataCadastro
                 };
@@ -43,7 +42,6 @@ namespace Mecanica.Models.Dtos
                     Id = this.Id,
                     IdPessoa = this.IdPessoa,
                     Pessoa = this.Pessoa.ConverteParaEntidade(),
-                    //PessoaJuridica = this.PessoaJuridica.ConverteParaEntidade(),
                     PessoaFisica = this.PessoaFisica.ConverteParaEntidade(),
                     Ativo = this.Ativo,
                     DataCadastro = this.DataCadastro
