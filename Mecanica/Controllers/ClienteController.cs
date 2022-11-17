@@ -96,7 +96,35 @@ namespace Mecanica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("IdPessoa, Pessoa, PessoaJuridica, PessoaFisica, Ativo, DataCadastro")] ClienteDto cliente)
+        public IActionResult Create([Bind("TipoPessoa")] PessoaDto pessoa)
+        {
+            try
+            {
+                if(pessoa.TipoPessoa == (int)TipoPessoa.Juridica)
+                {
+                    return View("CreatePJ");
+                }
+                else
+                {
+                    return View("CreatePF");
+                }
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
+        [HttpPost]
+        public IActionResult CreatePF([Bind("PessoaFisica")] ClienteDto cliente)
+        {
+            try
+            {
+                _clienteService.Cadastrar(cliente);
+                return RedirectToAction("List");
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
+        [HttpPost]
+        public IActionResult CreatePJ([Bind("PessoaJuridica")] ClienteDto cliente)
         {
             try
             {
