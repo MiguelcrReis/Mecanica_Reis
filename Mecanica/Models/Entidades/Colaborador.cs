@@ -3,7 +3,7 @@ using System;
 
 namespace Mecanica.Models.Entidades
 {
-    public class Funcionario
+    public class Colaborador
     {
         #region Parametros da Classe
         public string Id { get; set; }
@@ -14,7 +14,7 @@ namespace Mecanica.Models.Entidades
         #endregion
 
         #region Construtores da Classe
-        public Funcionario()
+        public Colaborador()
         {
 
         }
