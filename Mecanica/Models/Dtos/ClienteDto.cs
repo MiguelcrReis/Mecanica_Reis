@@ -23,7 +23,7 @@ namespace Mecanica.Models.Dtos
         #region Metodos
         public Cliente ConverteParaEntidade()
         {
-            if ((int)Pessoa.TipoPessoa == 2)
+            if ((int)Pessoa.TipoPessoa == 0)
             {
                 return new Cliente
                 {

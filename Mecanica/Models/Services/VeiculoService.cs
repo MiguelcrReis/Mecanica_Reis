@@ -1,6 +1,6 @@
 ﻿using Mecanica.Models.Contracts.Repositories;
 using Mecanica.Models.Contracts.Services;
-using Mecanica.Models.DTOS;
+using Mecanica.Models.Dtos;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;

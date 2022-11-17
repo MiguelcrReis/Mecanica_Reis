@@ -1,5 +1,5 @@
 ﻿using Mecanica.Models.Contracts.Services;
-using Mecanica.Models.DTOS;
+using Mecanica.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -45,6 +45,7 @@ namespace Mecanica.Controllers
         }
         #endregion
 
+        #region Create Veiculo
         //Todas as Actions por padrão são get, para enviar dados via post precisa usar o HttpPost
 
         [HttpPost]
@@ -58,7 +59,9 @@ namespace Mecanica.Controllers
             }
             catch (Exception ex) { throw ex; }
         }
+        #endregion
 
+        #region Edit
         public IActionResult Edit(string? id)
         {
             if (string.IsNullOrEmpty(id))
@@ -69,10 +72,11 @@ namespace Mecanica.Controllers
             if (veiculo == null)
                 return NotFound();
 
-
             return View(veiculo);
         }
+        #endregion
 
+        #region Edit Veiculo
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit([Bind("Id, Placa, Fabricante, Modelo, AnoFabricacao, AnoModelo, Combustivel, Cor")] VeiculoDto veiculo)
@@ -87,7 +91,9 @@ namespace Mecanica.Controllers
             }
             catch (Exception ex) { throw ex; }
         }
+        #endregion
 
+        #region Details
         public IActionResult Details(string? id)
         {
             if (string.IsNullOrEmpty(id))
@@ -100,7 +106,9 @@ namespace Mecanica.Controllers
 
             return View(veiculo);
         }
+        #endregion
 
+        #region Delete
         public IActionResult Delete(string? id)
         {
             if (string.IsNullOrEmpty(id))
@@ -113,6 +121,9 @@ namespace Mecanica.Controllers
 
             return View(veiculo);
         }
+#endregion
+
+        #region Delete Veiculo
 
         [HttpPost]
         public IActionResult Delete([Bind("Id, Placa, Fabricante, Modelo, AnoFabricacao, AnoModelo, Combustivel, Cor")] VeiculoDto veiculo)
@@ -120,5 +131,6 @@ namespace Mecanica.Controllers
             _veiculoService.Excluir(veiculo.Id);
             return RedirectToAction("List");
         }
+        #endregion
     }
 }

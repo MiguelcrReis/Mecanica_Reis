@@ -1,4 +1,4 @@
-﻿using Mecanica.Models.DTOS;
+﻿using Mecanica.Models.Dtos;
 using System;
 
 namespace Mecanica.Models.Entidades

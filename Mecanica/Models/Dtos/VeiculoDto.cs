@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace Mecanica.Models.DTOS
+namespace Mecanica.Models.Dtos
 {
     public class VeiculoDto
     {

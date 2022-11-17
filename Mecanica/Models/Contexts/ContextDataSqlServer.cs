@@ -231,9 +231,19 @@ namespace Mecanica.Models.Contexts
                 var query = SqlManager.GetSql(TSql.CADASTRAR_CLIENTE);
                 var command = new SqlCommand(query, _connection);
 
+                int idPessoa = CadastrarPessoa(cliente.Pessoa);
+
+                if (cliente.Pessoa.TipoPessoa == (int)TipoPessoa.Juridica)
+                {
+                    CadastrarPessoaJuridica(cliente.PessoaJuridica);
+                }
+                else
+                {
+                    CadastrarPessoaFisica(cliente.PessoaFisica);
+                }
+
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
-                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = idPessoa;
                 command.Parameters.Add("@ativo", SqlDbType.Bit).Value = cliente.Ativo ? 1 : 0;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = cliente.DataCadastro;
 
