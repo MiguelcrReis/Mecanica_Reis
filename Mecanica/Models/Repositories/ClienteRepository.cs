@@ -1,6 +1,6 @@
 ﻿using Mecanica.Models.Contracts.Contexts;
 using Mecanica.Models.Contracts.Repositories;
-using Mecanica.Models.DTOS;
+using Mecanica.Models.Dtos;
 using Mecanica.Models.Entidades;
 using System.Collections.Generic;
 

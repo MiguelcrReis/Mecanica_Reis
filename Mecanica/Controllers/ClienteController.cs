@@ -1,6 +1,5 @@
 ﻿using Mecanica.Models.Contracts.Services;
 using Mecanica.Models.Dtos;
-using Mecanica.Models.DTOS;
 using Mecanica.Models.Entidades;
 using Mecanica.Models.Enums;
 using Mecanica.Models.Services;
@@ -45,62 +44,26 @@ namespace Mecanica.Controllers
             {
                 var clientes = _clienteService.Listar();
 
-                #region Modo alternativo
-                //var pessoas = _pessoaService.Listar();
-                //var pessoasJuridicas = _pessoaJuridicaService.Listar();
-                //var pessoasFisicas = _pessoaFisicaService.Listar();
-
-                //foreach (var cliente in clientes)
-                //{
-                //    foreach (var pessoa in pessoas)
-                //    {
-                //        if (cliente.IdPessoa.Equals(pessoa.Id))
-                //        {
-                //            cliente.Pessoa = pessoa;
-
-                //            if (cliente.Pessoa.TipoPessoa.Equals(TipoPessoa.Juridica))
-                //            {
-                //                foreach (var pj in pessoasJuridicas)
-                //                {
-                //                    if (cliente.IdPessoa.Equals(pj.IdPessoa))
-                //                    {
-                //                        cliente.PessoaJuridica = pj;
-                //                    }
-                //                }
-                //            }
-                //            else
-                //            {
-                //                foreach (var pf in pessoasFisicas)
-                //                {
-                //                    if (cliente.IdPessoa.Equals(pf.IdPessoa))
-                //                    {
-                //                        cliente.PessoaFisica = pf;
-                //                    }
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
-                #endregion
-
                 return View(clientes);
             }
             catch (Exception ex) { throw ex; }
         }
         #endregion
 
+        #region Create
         public IActionResult Create()
         {
             return View();
         }
+        #endregion
 
+        #region Create Cliente
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("TipoPessoa")] PessoaDto pessoa)
+        public IActionResult Create([Bind("Pessoa, TipoPessoa")] ClienteDto cliente)
         {
             try
             {
-                if(pessoa.TipoPessoa == (int)TipoPessoa.Juridica)
+                if (cliente.Pessoa.TipoPessoa == (int)TipoPessoa.Juridica)
                 {
                     return View("CreatePJ");
                 }
@@ -111,27 +74,48 @@ namespace Mecanica.Controllers
             }
             catch (Exception ex) { throw ex; }
         }
+        #endregion
 
+        #region Create Cliente Pessoa Juridica
         [HttpPost]
-        public IActionResult CreatePF([Bind("PessoaFisica")] ClienteDto cliente)
+        [ValidateAntiForgeryToken]
+        public IActionResult CreatePJ([Bind("PessoaJuridica, NomeFantasia, RazaoSocial, Cnpj")] ClienteDto cliente)
         {
             try
             {
+                cliente.Ativo = true;
+                cliente.DataCadastro = DateTime.Now;
+                cliente.Pessoa = new PessoaDto();
+                cliente.Pessoa.DataCadastro = DateTime.Now;
+                cliente.Pessoa.Cliente = true;
+                cliente.Pessoa.TipoPessoa = TipoPessoa.Juridica;
+
                 _clienteService.Cadastrar(cliente);
                 return RedirectToAction("List");
             }
             catch (Exception ex) { throw ex; }
         }
+        #endregion
 
+        #region Create Cliente Pessoa Fisica
         [HttpPost]
-        public IActionResult CreatePJ([Bind("PessoaJuridica")] ClienteDto cliente)
+        [ValidateAntiForgeryToken]
+        public IActionResult CreatePF([Bind("PessoaFisica, Nome, Cpf")] ClienteDto cliente)
         {
             try
             {
+                cliente.Ativo = true;
+                cliente.DataCadastro = DateTime.Now;
+                cliente.Pessoa = new PessoaDto();
+                cliente.Pessoa.DataCadastro = DateTime.Now;
+                cliente.Pessoa.Cliente = true;
+                cliente.Pessoa.TipoPessoa = TipoPessoa.Fisica;
+
                 _clienteService.Cadastrar(cliente);
                 return RedirectToAction("List");
             }
             catch (Exception ex) { throw ex; }
         }
+        #endregion
     }
 }
