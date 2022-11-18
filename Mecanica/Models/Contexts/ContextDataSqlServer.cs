@@ -227,20 +227,22 @@ namespace Mecanica.Models.Contexts
         {
             try
             {
-                _connection.Open();
-                var query = SqlManager.GetSql(TSql.CADASTRAR_CLIENTE);
-                var command = new SqlCommand(query, _connection);
-
                 int idPessoa = CadastrarPessoa(cliente.Pessoa);
 
                 if (cliente.Pessoa.TipoPessoa == (int)TipoPessoa.Juridica)
                 {
+                    cliente.PessoaJuridica.IdPessoa = idPessoa;
                     CadastrarPessoaJuridica(cliente.PessoaJuridica);
                 }
                 else
                 {
+                    cliente.PessoaFisica.IdPessoa = idPessoa;
                     CadastrarPessoaFisica(cliente.PessoaFisica);
                 }
+
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.CADASTRAR_CLIENTE);
+                var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
                 command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = idPessoa;
@@ -299,7 +301,7 @@ namespace Mecanica.Models.Contexts
 
                     var pessoa = PesquisarPessoaPorId(idPessoa);
 
-                    if ((int)pessoa.TipoPessoa == 2)
+                    if ((int)pessoa.TipoPessoa == 0)
                     {
                         var cliente = new Cliente
                         {
@@ -415,7 +417,7 @@ namespace Mecanica.Models.Contexts
                 var query = SqlManager.GetSql(TSql.CADASTRAR_PESSOA);
                 var command = new SqlCommand(query, _connection);
 
-                command.Parameters.Add("@tipoPessoa", SqlDbType.SmallInt).Value = int.Parse(pessoa.TipoPessoa.ToString());
+                command.Parameters.Add("@tipoPessoa", SqlDbType.SmallInt).Value = (int)pessoa.TipoPessoa;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = pessoa.DataCadastro;
                 command.Parameters.Add("@cliente", SqlDbType.Bit).Value = pessoa.Cliente ? 1 : 0;
                 command.Parameters.Add("@colaborador", SqlDbType.Bit).Value = pessoa.Colaborador ? 1 : 0;
@@ -588,9 +590,8 @@ namespace Mecanica.Models.Contexts
                 var query = SqlManager.GetSql(TSql.CADASTRAR_PESSOA_JURIDICA);
                 var command = new SqlCommand(query, _connection);
 
-                command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaJuridica.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.Pessoa.Id;
-                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
+                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.Pessoa.Id;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaJuridica.IdPessoa;
                 command.Parameters.Add("@nomeFantasia", SqlDbType.VarChar).Value = pessoaJuridica.NomeFantasia;
                 command.Parameters.Add("@razaoSocial", SqlDbType.VarChar).Value = pessoaJuridica.RazaoSocial;
                 command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = pessoaJuridica.Cnpj;

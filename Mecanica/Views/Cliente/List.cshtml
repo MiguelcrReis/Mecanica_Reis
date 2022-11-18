@@ -19,18 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Pessoa.Id)
             </th>
-            @if (Html.DisplayNameFor(model => model.Pessoa.TipoPessoa) == "2")
-            {
-                <th>
-                    @Html.DisplayNameFor(model => model.PessoaJuridica.NomeFantasia)
-                </th>
-            }
-            else
-            {
-                <th>
-                    @Html.DisplayNameFor(model => model.PessoaFisica.Nome)
-                </th>
-            }
+            <th>
+                Nome
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ativo)
             </th>
@@ -43,6 +34,7 @@
     <tbody>
         @foreach (var item in Model)
         {
+            string linkEdit;
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
@@ -50,14 +42,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Pessoa.Id)
                 </td>
-                @if ((int)item.Pessoa.TipoPessoa == 2)
+                @if ((int)item.Pessoa.TipoPessoa == 0)
                 {
+                    linkEdit = "EditPJ";
                     <td>
                         @Html.DisplayFor(modelItem => item.PessoaJuridica.NomeFantasia)
                     </td>
                 }
                 else
                 {
+                    linkEdit = "EditPF";
                     <td>
                         @Html.DisplayFor(modelItem => item.PessoaFisica.Nome)
                     </td>
@@ -69,9 +63,9 @@
                     @Html.DisplayFor(modelItem => item.DataCadastro)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Atualizar", "EditPF", new { id = item.Id }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id  }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.Id  })
                 </td>
             </tr>
         }

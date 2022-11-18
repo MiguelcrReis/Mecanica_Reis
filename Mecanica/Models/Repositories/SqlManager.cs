@@ -91,7 +91,7 @@ namespace Mecanica.Models.Repositories
                 #region CADASTRAR_PESSOA
                 case TSql.CADASTRAR_PESSOA:
                     sql = "INSERT INTO [dbo].[Pessoa] ([tipoPessoa], [dataCadastro], [cliente], [colaborador], [fornecedor])" +
-                        "VALUES ('@tipoPessoa, @dataCadastro', @cliente, @colaborador, @fornecedor) " +
+                        "VALUES (@tipoPessoa, @dataCadastro, @cliente, @colaborador, @fornecedor) " +
                         "SELECT SCOPE_IDENTITY() GO";
                     break;
                 #endregion

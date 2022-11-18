@@ -1,14 +1,8 @@
 ﻿using Mecanica.Models.Contracts.Services;
 using Mecanica.Models.Dtos;
-using Mecanica.Models.Entidades;
 using Mecanica.Models.Enums;
-using Mecanica.Models.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 
 namespace Mecanica.Controllers
 {
@@ -112,6 +106,54 @@ namespace Mecanica.Controllers
                 cliente.Pessoa.TipoPessoa = TipoPessoa.Fisica;
 
                 _clienteService.Cadastrar(cliente);
+                return RedirectToAction("List");
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        #endregion
+
+        #region Edit 
+        public IActionResult Edit(string? id)
+        {
+            if (string.IsNullOrEmpty(id)) return NotFound();
+
+            var cliente = _clienteService.PesquisarPorId(id);
+
+            if (cliente == null) return NotFound();
+
+            return View(cliente);
+
+        }
+        #endregion
+
+        #region Edit Cliente Pessoa Juridica
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPJ([Bind("PessoaJuridica, NomeFantasia, RazaoSocial, Cnpj")] ClienteDto cliente)
+        {
+            if (string.IsNullOrEmpty(cliente.Id))
+                return NotFound();
+
+            try
+            {
+                _clienteService.Atualizar(cliente);
+                return RedirectToAction("List");
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        #endregion
+
+        #region Edit Cliente Pessoa Fisica
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPF([Bind("PessoaFisica, Nome, Cpf")] ClienteDto cliente)
+        {
+            if (string.IsNullOrEmpty(cliente.Id))
+                return NotFound();
+
+            try
+            {
+                _clienteService.Atualizar(cliente);
                 return RedirectToAction("List");
             }
             catch (Exception ex) { throw ex; }
