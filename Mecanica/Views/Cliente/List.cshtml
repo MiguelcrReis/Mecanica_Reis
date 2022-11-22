@@ -34,7 +34,6 @@
     <tbody>
         @foreach (var item in Model)
         {
-            string linkEdit;
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
@@ -44,14 +43,12 @@
                 </td>
                 @if ((int)item.Pessoa.TipoPessoa == 0)
                 {
-                    linkEdit = "EditPJ";
                     <td>
                         @Html.DisplayFor(modelItem => item.PessoaJuridica.NomeFantasia)
                     </td>
                 }
                 else
                 {
-                    linkEdit = "EditPF";
                     <td>
                         @Html.DisplayFor(modelItem => item.PessoaFisica.Nome)
                     </td>
@@ -63,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.DataCadastro)
                 </td>
                 <td>
-                    @Html.ActionLink("Atualizar", "EditPF", new { id = item.Id }) |
+                    @Html.ActionLink("Atualizar", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Detalhes", "Details", new { id = item.Id  }) |
                     @Html.ActionLink("Excluir", "Delete", new { id = item.Id  })
                 </td>

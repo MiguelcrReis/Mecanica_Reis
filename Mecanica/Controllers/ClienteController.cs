@@ -112,7 +112,7 @@ namespace Mecanica.Controllers
         }
         #endregion
 
-        #region Edit 
+        #region Edit Cliente 
         public IActionResult Edit(string? id)
         {
             if (string.IsNullOrEmpty(id)) return NotFound();
@@ -121,29 +121,34 @@ namespace Mecanica.Controllers
 
             if (cliente == null) return NotFound();
 
-            return View(cliente);
-
+            if (cliente.Pessoa.TipoPessoa == (int)TipoPessoa.Juridica)
+            {
+                return View("EditPJ(cliente)", cliente);
+            }
+            else
+            {
+                return View("EditPF", cliente);
+            }
         }
-        #endregion
 
-        #region Edit Cliente Pessoa Juridica
+        // Edit Cliente Pessoa Juridica 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditPJ([Bind("PessoaJuridica, NomeFantasia, RazaoSocial, Cnpj")] ClienteDto cliente)
+        public IActionResult EditPJ([Bind("NomeFantasia, RazaoSocial, Cnpj")] ClienteDto cliente)
         {
             if (string.IsNullOrEmpty(cliente.Id))
                 return NotFound();
 
             try
             {
+                cliente.Pessoa.TipoPessoa = TipoPessoa.Juridica;
                 _clienteService.Atualizar(cliente);
                 return RedirectToAction("List");
             }
             catch (Exception ex) { throw ex; }
         }
-        #endregion
 
-        #region Edit Cliente Pessoa Fisica
+        // Edit Cliente Pessoa Fisica
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditPF([Bind("PessoaFisica, Nome, Cpf")] ClienteDto cliente)
@@ -153,6 +158,8 @@ namespace Mecanica.Controllers
 
             try
             {
+                cliente.Pessoa = new PessoaDto();
+                cliente.Pessoa.TipoPessoa = TipoPessoa.Fisica;
                 _clienteService.Atualizar(cliente);
                 return RedirectToAction("List");
             }

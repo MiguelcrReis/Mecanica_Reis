@@ -204,18 +204,30 @@ namespace Mecanica.Models.Contexts
         {
             try
             {
+                //AtualizarPessoa(cliente.Pessoa);
+
+                if (cliente.Pessoa.TipoPessoa == (int)TipoPessoa.Juridica)
+                {
+                    cliente.PessoaJuridica.IdPessoa = cliente.IdPessoa;
+                    AtualizarPessoaJuridica(cliente.PessoaJuridica);
+                }
+                else
+                {
+                    cliente.PessoaFisica.IdPessoa = cliente.IdPessoa;
+                    CadastrarPessoaFisica(cliente.PessoaFisica);
+                }
+
                 _connection.Open();
+
                 var query = SqlManager.GetSql(TSql.ATUALIZAR_CLIENTE);
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.Pessoa.Id;
-                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = cliente.IdPessoa;
                 command.Parameters.Add("@ativo", SqlDbType.Bit).Value = cliente.Ativo ? 1 : 0;
                 command.Parameters.Add("@dataCadastro", SqlDbType.DateTime).Value = cliente.DataCadastro;
 
                 command.ExecuteNonQuery();
-
             }
             catch (Exception ex) { throw ex; }
             finally { if (_connection.State == ConnectionState.Open) { _connection.Close(); } }
@@ -363,13 +375,32 @@ namespace Mecanica.Models.Contexts
                     var ativo = bool.Parse(colunas[2].ToString());
                     var dataCadastro = DateTime.Parse(colunas[3].ToString());
 
-                    cliente = new Cliente
+                    var pessoa = PesquisarPessoaPorId(idPessoa);
+
+                    if ((int)pessoa.TipoPessoa == 0)
                     {
-                        Id = id_cliente,
-                        IdPessoa = idPessoa,
-                        Ativo = ativo,
-                        DataCadastro = dataCadastro
-                    };
+                        cliente = new Cliente
+                        {
+                            Id = id_cliente,
+                            IdPessoa = idPessoa,
+                            Pessoa = pessoa,
+                            PessoaJuridica = PesquisarPessoaJuridicaPorIdPessoa(idPessoa),
+                            Ativo = ativo,
+                            DataCadastro = dataCadastro
+                        };
+                    }
+                    else
+                    {
+                        cliente = new Cliente
+                        {
+                            Id = id_cliente,
+                            IdPessoa = idPessoa,
+                            Pessoa = pessoa,
+                            PessoaFisica = PesquisarPessoaFisicaPorIdPessoa(idPessoa),
+                            Ativo = ativo,
+                            DataCadastro = dataCadastro
+                        };
+                    }
                 }
 
                 adapter = null; dataset = null;
@@ -802,8 +833,7 @@ namespace Mecanica.Models.Contexts
                 var command = new SqlCommand(query, _connection);
 
                 command.Parameters.Add("@id", SqlDbType.SmallInt).Value = pessoaFisica.Id;
-                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.Pessoa.Id;
-                //command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
+                command.Parameters.Add("@idPessoa", SqlDbType.SmallInt).Value = pessoaFisica.IdPessoa;
                 command.Parameters.Add("@nome", SqlDbType.VarChar).Value = pessoaFisica.Nome;
                 command.Parameters.Add("@cpf", SqlDbType.VarChar).Value = pessoaFisica.Cpf;
 
